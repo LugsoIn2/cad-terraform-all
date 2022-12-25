@@ -20,35 +20,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
     
-      #- name: Setup Terraform
-      #  uses: hashicorp/setup-terraform@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
 
       - name: Download GitHub releases
         working-directory: ./local_helper/
         run: |
-         #chmod +x ./download-gh-releases.sh
-         #./download-gh-releases.sh
-         gh release download --pattern 'userservice*.zip' --clobber --repo https://github.com/LugsoIn2/cad-event-userservice.git
-         unzip -o userservice.zip -d ./
+         chmod +x ./download-gh-releases.sh
+         ./download-gh-releases.sh
         #shell: bash
 
-      # - name: Terraform Init
-      #   id: init
-      #   run: terraform init -var="env=dev"
+      - name: Terraform Init
+        id: init
+        run: terraform init -var="env=dev"
       
-      # - name: Terraform Validate
-      #   id: validate
-      #   run: terraform validate -no-color
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
 
-      # - name: Terraform workspace
-      #   id: workspace
-      #   run: terraform workspace select prod
+      - name: Terraform workspace
+        id: workspace
+        run: terraform workspace select prod
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   #if: github.event_name == 'pull_request'
-      #   run: terraform plan -no-color -input=false -var-file="./prod.tfvars"
-      #   #continue-on-error: true
+      - name: Terraform Plan
+        id: plan
+        #if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false -var-file="./prod.tfvars"
+        #continue-on-error: true
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'

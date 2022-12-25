@@ -19,15 +19,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Download GitHub releases
-        run: ./download-gh-releases.sh
-        working-directory: ./local_helper/
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+
+      - name: Download GitHub releases
+        working-directory: ./local_helper/
+        run: |
+         chmod +x ./download-gh-releases.sh
+         ./download-gh-releases.sh
+        shell: bash
 
       - name: Terraform Init
         id: init

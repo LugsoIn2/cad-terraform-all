@@ -4,7 +4,7 @@ locals {
 }
 
 module "userservice_bucket" {
-    source = "./../modules/s3"
+    source = "./../../../modules/s3"
     bucket_name = local.concat_bucket_name
     s3_tags = var.tags_userservice
     dist_directory = var.dist_directory_userservice
@@ -12,7 +12,7 @@ module "userservice_bucket" {
 }
 
 module "a_record_userservice" {
-    source = "./../modules/route53"
+    source = "./../../../modules/route53"
     subdomainName = local.concat_bucket_name
     record_type = "A"
     target_dns = module.userservice_bucket.userservice_website_endpoint

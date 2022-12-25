@@ -1,5 +1,6 @@
 name: Deploy_Production
-on: [repository_dispatch]
+#on: [repository_dispatch]
+on: workflow_dispatch
 
 env:
  TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID}}

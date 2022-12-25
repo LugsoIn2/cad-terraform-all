@@ -1,11 +1,3 @@
-variable "access_key" {
-
-}
-
-variable "secret_key" {
-  
-}
-
 variable "bucket_name_userservice" {
   description = "Name for S3 bucket"
   type = string

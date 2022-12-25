@@ -1,0 +1,9 @@
+name: Deploy_Production
+on: [repository_dispatch]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Triggering Deploy_Production"
+      - name: Checkout
+        uses: actions/checkout@v2

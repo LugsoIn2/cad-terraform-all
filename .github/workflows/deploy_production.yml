@@ -20,8 +20,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - run: ./download-gh-releases.sh
-          working-directory: ./local_helper/
+      - name: Download GitHub releases
+        run: ./download-gh-releases.sh
+        working-directory: ./local_helper/
         #env:
         #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     

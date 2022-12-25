@@ -1,21 +1,5 @@
 name: Deploy_Production
 on: [repository_dispatch]
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Triggering Deploy_Production"
-      - name: Checkout
-        uses: actions/checkout@v2
-
-
-name: "Build and Deploy with Terraform"
-
-on:
-  push:
-    branches:
-      - main
-  #pull_request:
 
 env:
  TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID}}

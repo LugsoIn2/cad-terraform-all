@@ -15,13 +15,13 @@ module "template_files_assets" {
 }
 
 
-resource "aws_s3_bucket" "userservice_bucket" {
+resource "aws_s3_bucket" "static_web_bucket" {
   bucket = local.complete_bucket_name
   tags = var.s3_tags
 }
 
-resource "aws_s3_bucket_website_configuration" "userservice_bucket-config" {
-  bucket = aws_s3_bucket.userservice_bucket.bucket
+resource "aws_s3_bucket_website_configuration" "static_web_bucket-config" {
+  bucket = aws_s3_bucket.static_web_bucket.bucket
 
   index_document {
     suffix = "index.html"
@@ -29,14 +29,14 @@ resource "aws_s3_bucket_website_configuration" "userservice_bucket-config" {
 
 }
 
-resource "aws_s3_bucket_policy" "userservice-bucket-policy" {
-  bucket = aws_s3_bucket.userservice_bucket.bucket
+resource "aws_s3_bucket_policy" "static_web-bucket-policy" {
+  bucket = aws_s3_bucket.static_web_bucket.bucket
   policy = data.aws_iam_policy_document.allow_access_from_all.json
 }
 
 
 resource "aws_s3_bucket_object" "root" {
-  bucket = "${aws_s3_bucket.userservice_bucket.id}"
+  bucket = "${aws_s3_bucket.static_web_bucket.id}"
 
   for_each = module.template_files.files
   key    = each.key
@@ -47,7 +47,7 @@ resource "aws_s3_bucket_object" "root" {
 }
 
 resource "aws_s3_bucket_object" "assets" {
-  bucket = "${aws_s3_bucket.userservice_bucket.id}"
+  bucket = "${aws_s3_bucket.static_web_bucket.id}"
 
   for_each = module.template_files_assets.files
   key    = each.key
@@ -78,11 +78,11 @@ data "aws_iam_policy_document" "allow_access_from_all" {
 }
 
 
-output "userservice_website_endpoint" {
-  #value = aws_s3_bucket.userservice_bucket.website_endpoint
-  value = aws_s3_bucket_website_configuration.userservice_bucket-config.website_domain
+output "static_web_website_endpoint" {
+  #value = aws_s3_bucket.static_web_bucket.website_endpoint
+  value = aws_s3_bucket_website_configuration.static_web_bucket-config.website_domain
 }
 
-output "userservice_hosted_zone_id" {
-  value = aws_s3_bucket.userservice_bucket.hosted_zone_id
+output "static_web_hosted_zone_id" {
+  value = aws_s3_bucket.static_web_bucket.hosted_zone_id
 }

@@ -7,5 +7,5 @@ then
 fi
 gh release download --pattern 'userservice*.zip' --clobber --repo https://github.com/LugsoIn2/cad-event-userservice.git
 unzip -o userservice.zip -d ./
-gh release download --pattern 'adm_ui_service*.zip' --clobber --repo https://github.com/LugsoIn2/cad-admin-ui-service.git
-unzip -o adm_ui_service.zip -d ./
+gh release download --pattern 'admin_ui_service*.zip' --clobber --repo https://github.com/LugsoIn2/cad-admin-ui-service.git
+unzip -o admin_ui_service.zip -d ./

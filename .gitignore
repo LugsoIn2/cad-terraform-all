@@ -111,3 +111,5 @@ __pycache__
 ## Helper Script ignore files
 userservice*.zip
 local_helper/userservice
+
+values.secret.yaml

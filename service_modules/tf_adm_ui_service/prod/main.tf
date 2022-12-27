@@ -1,6 +1,6 @@
 locals {
- concat_bucket_name = var.bucket_name_adm_ui_service != "" ? "${terraform.workspace}-${var.bucket_name_adm_ui_service}" : "${terraform.workspace}"
-
+ #concat_bucket_name = var.bucket_name_adm_ui_service != "" ? "${terraform.workspace}-${var.bucket_name_adm_ui_service}" : "${terraform.workspace}"
+ concat_bucket_name = "${terraform.workspace}-${var.bucket_name_adm_ui_service}"
 }
 
 module "adm_ui_service_bucket" {

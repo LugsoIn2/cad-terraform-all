@@ -1,5 +1,6 @@
 locals {
- concat_bucket_name = var.bucket_name_userservice != "" ? "${terraform.workspace}-${var.bucket_name_userservice}" : "${terraform.workspace}"
+ #concat_bucket_name = var.bucket_name_userservice != "" ? "${terraform.workspace}-${var.bucket_name_userservice}" : "${terraform.workspace}"
+ concat_bucket_name = "${terraform.workspace}-${var.bucket_name_userservice}"
 
 }
 

@@ -35,13 +35,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Download GitHub releases
-        working-directory: ./local_helper/
-        run: |
-         chmod +x ./load_and_build_admin_ui.sh
-         chmod +x ./load_and_build_userservice.sh
-
-
       - name: Terraform Init
         id: init
         run: terraform init -var="env=dev"
@@ -60,26 +53,6 @@ jobs:
         run: terraform plan -no-color -input=false
         #continue-on-error: true
       
-
-      - name: ls please
-        working-directory: ./local_helper/
-        run: |
-         ls -la
-         echo " "
-         echo "la -la tmp_prod_userservice"
-         ls -la tmp_prod_userservice
-         echo "ls -la tmp_prod_admin_ui"
-         ls -la tmp_prod_admin_ui
-         echo " "
-         echo "ls -la tmp_prod_userservice/cad-event-userservice-0.0.1"
-         ls -la tmp_prod_userservice/cad-event-userservice-0.0.1
-         echo "ls -la tmp_prod_userservice/admin_ui_service-0.0.2"
-         ls -la tmp_prod_userservice/admin_ui_service-0.0.2
-         echo " "
-         echo "ls -la tmp_prod_userservice/dist"
-         ls -la tmp_prod_userservice/dist
-         ls -la tmp_prod_admin_ui/dist
-
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'

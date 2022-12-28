@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #input ./script.sh ghtoken customer_nr servicename https_enabled 
 if ! command -v gh &> /dev/null
 then

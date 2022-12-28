@@ -2,7 +2,8 @@ module "prod-userservice" {
   source = "./../service_modules/tf_userservice/prod/"
   bucket_name_userservice = "userservice"
   tags_userservice = {
-      "Environment" = "Prod"
+      "Environment" = "Subscription_Enterprise"
+      "Customer" = "${terraform.workspace}"
     }
   dist_assets_directory_userservice = "../local_helper/tmp_${terraform.workspace}_userservice/dist/assets"
   dist_directory_userservice = "../local_helper/tmp_${terraform.workspace}_userservice/dist"

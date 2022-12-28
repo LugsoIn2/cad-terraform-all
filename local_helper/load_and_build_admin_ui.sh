@@ -1,17 +1,17 @@
 #!/bin/sh
-#input ./script.sh ghtoken customer_nr servicename https_enabled 
-# if ! command -v gh &> /dev/null
-# then
-#     echo "the dependency gh could not be found"
-#     echo "please install the github cli tool gh"
-#     exit
-# fi
-# if ! command -v npm &> /dev/null
-# then
-#     echo "the dependency npm could not be found"
-#     echo "please install npm"
-#     exit
-# fi
+# input ./script.sh ghtoken customer_nr servicename https_enabled 
+if ! command -v gh &> /dev/null
+then
+    echo "the dependency gh could not be found"
+    echo "please install the github cli tool gh"
+    exit
+fi
+if ! command -v npm &> /dev/null
+then
+    echo "the dependency npm could not be found"
+    echo "please install npm"
+    exit
+fi
 
 
 GH_TOKEN=$1

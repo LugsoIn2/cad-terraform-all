@@ -40,7 +40,6 @@ jobs:
         run: |
          chmod +x ./load_and_build_admin_ui.sh
          chmod +x ./load_and_build_userservice.sh
-         ./load_and_build_admin_ui.sh
 
 
       - name: Terraform Init
@@ -60,6 +59,12 @@ jobs:
         #if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
         #continue-on-error: true
+      
+
+      - name: ls please
+        working-directory: ./local_helper/
+        run: |
+         ls -la
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'

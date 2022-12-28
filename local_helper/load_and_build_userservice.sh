@@ -33,7 +33,7 @@ echo $GH_TOKEN | gh auth login --with-token
 # Admin Userservice
 gh release download --archive zip --clobber --repo https://github.com/LugsoIn2/cad-event-userservice.git --output cad-event-userservice.zip
 unzip -o cad-event-userservice.zip -d ./
-cd cad-event-userservice*
+cd cad-event-userservice-*
 npm install
 echo $VITE_API_ENVVAR > .env
 npm run build --if-present

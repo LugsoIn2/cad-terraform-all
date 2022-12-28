@@ -33,7 +33,7 @@ echo test2
 # Admin UI Service
 gh release download --archive zip --clobber --repo https://github.com/LugsoIn2/cad-admin-ui-service.git --output cad-admin-ui-service.zip
 unzip -o cad-admin-ui-service.zip -d ./
-cd cad-admin-ui-service*
+cd cad-admin-ui-service-*
 npm install
 echo $VITE_API_ENVVAR > .env
 npm run build --if-present

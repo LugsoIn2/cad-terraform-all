@@ -7,5 +7,5 @@ variable "secret_key" {
 }
 
 variable "gh_token" {
-  
+    sensitive   = true
 }

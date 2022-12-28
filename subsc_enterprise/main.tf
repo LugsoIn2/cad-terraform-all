@@ -12,3 +12,10 @@ module "prod-userservice" {
   secret_key = var.secret_key
   gh_token = var.gh_token
 }
+module "prod-eventservice" {
+  source = "./../service_modules/tf_eventservice/prod/"
+  release_name_and_namespace_k8s_eventservice = terraform.workspace
+  allowed_hosts_eventservice = "${terraform.workspace}-eventservice.aws.netpy.de"
+  access_key = var.access_key
+  secret_key = var.secret_key
+}

@@ -1,9 +1,0 @@
-dependencies:
-- name: eventservice
-  repository: file://../service_modules/eventservice/
-  version: 0.1.0
-- name: adminservice
-  repository: file://../service_modules/adminservice/
-  version: 0.1.0
-digest: sha256:c1372b0516d606885b3dc277d2d814fc000abfc269e3d40bbfca4e2e5ba90baf
-generated: "2022-12-28T22:20:09.683844+01:00"

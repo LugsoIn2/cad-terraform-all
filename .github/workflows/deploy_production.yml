@@ -40,6 +40,8 @@ jobs:
         run: |
          chmod +x ./load_and_build_admin_ui.sh
          chmod +x ./load_and_build_userservice.sh
+         ./load_and_build_admin_ui.sh
+
 
       - name: Terraform Init
         id: init

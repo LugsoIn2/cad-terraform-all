@@ -4,7 +4,7 @@ locals {
 }
 data "external" "build_admin_ui" {
 	program = ["bash", "-c", <<EOT
-./load_and_build_admin_ui.sh ${var.gh_token} ${terraform.workspace} -${var.backend_servicename_adm_ui_service} ${var.https_enabled_adm_ui_service} && echo "{\"dest\": \"./tmp_${terraform.workspace}_admin_ui\"}"
+./load_and_build_admin_ui.sh ${var.gh_token} ${terraform.workspace} -${var.backend_servicename_adm_ui_service} ${var.https_enabled_adm_ui_service} >&2 && echo "{\"dest\": \"./tmp_${terraform.workspace}_admin_ui\"}"
 EOT
 	]
 	working_dir = "${path.module}/../../../local_helper/"

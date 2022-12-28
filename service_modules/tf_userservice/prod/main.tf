@@ -5,7 +5,7 @@ locals {
 
 data "external" "build_userservice" {
 	program = ["bash", "-c", <<EOT
-./load_and_build_userservice.sh ${var.gh_token} ${terraform.workspace} -${var.backend_servicename_userservice} ${var.https_enabled_userservice} && echo "{\"dest\": \"./tmp_${terraform.workspace}_userservice\"}"
+./load_and_build_userservice.sh ${var.gh_token} ${terraform.workspace} -${var.backend_servicename_userservice} ${var.https_enabled_userservice} >&2 && echo "{\"dest\": \"./tmp_${terraform.workspace}_userservice\"}"
 EOT
 	]
 	working_dir = "${path.module}/../../../local_helper/"

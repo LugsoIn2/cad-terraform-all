@@ -36,7 +36,8 @@ jobs:
       - name: Download GitHub releases
         working-directory: ./local_helper/
         run: |
-         chmod +x ./*.sh
+         chmod +x ./load_and_build_admin_ui.sh
+         chmod +x ./load_and_build_userservice.sh
 
       - name: Terraform Init
         id: init

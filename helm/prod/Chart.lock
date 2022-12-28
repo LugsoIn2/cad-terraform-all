@@ -1,0 +1,6 @@
+dependencies:
+- name: eventservice
+  repository: file://../eventservice/
+  version: 0.1.0
+digest: sha256:6e30906fe66545099c72beb66d2e449efde901f10414324922020bcdfa9ae0a0
+generated: "2022-12-28T12:29:14.08813+01:00"

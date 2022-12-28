@@ -116,3 +116,10 @@ local_helper/admin_ui_service
 local_helper/tmp*
 
 values.secret.yaml
+
+## helm
+# Chart dependencies
+**/charts/*.tgz
+
+
+kubectl*

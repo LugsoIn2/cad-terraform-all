@@ -21,9 +21,9 @@ HTTPS_ENABLED=$4
 
 
 if [ $HTTPS_ENABLED -eq 1 ]; then
-    VITE_API_ENVVAR="VITE_API_ENDPOINT=https://$CUSTOMER_NR$SERVICENAME.aws.netpy:443"
+    VITE_API_ENVVAR="VITE_API_ENDPOINT=https://$CUSTOMER_NR$SERVICENAME.aws.netpy.de:443"
 else
-    VITE_API_ENVVAR="VITE_API_ENDPOINT=http://$CUSTOMER_NR$SERVICENAME.aws.netpy:80"
+    VITE_API_ENVVAR="VITE_API_ENDPOINT=http://$CUSTOMER_NR$SERVICENAME.aws.netpy.de:80"
 fi
 
 mkdir -p tmp_$CUSTOMER_NR\_userservice
@@ -36,7 +36,7 @@ unzip -o cad-event-userservice.zip -d ./
 cd cad-event-userservice*
 npm install
 echo $VITE_API_ENVVAR > .env
-npm run build --if-present
+npm run build
 cp -R dist ../
 cd ../
 rm -rf cad-event-userservice*

@@ -21,14 +21,14 @@ HTTPS_ENABLED=$4
 
 
 if [ $HTTPS_ENABLED -eq 1 ]; then
-    VITE_API_ENVVAR="VITE_API_ENDPOINT=https://$CUSTOMER_NR$SERVICENAME.aws.netpy:443"
+    VITE_API_ENVVAR="VITE_API_ENDPOINT=https://$CUSTOMER_NR$SERVICENAME.aws.netpy.de:443"
 else
-    VITE_API_ENVVAR="VITE_API_ENDPOINT=http://$CUSTOMER_NR$SERVICENAME.aws.netpy:80"
+    VITE_API_ENVVAR="VITE_API_ENDPOINT=http://$CUSTOMER_NR$SERVICENAME.aws.netpy.de:80"
 fi
 
 mkdir -p tmp_$CUSTOMER_NR\_admin_ui
 cd tmp_$CUSTOMER_NR\_admin_ui
-echo $GH_TOKEN | gh auth login --with-token
+#echo $GH_TOKEN | gh auth login --with-token
 
 # Admin UI Service
 gh release download --archive zip --clobber --repo https://github.com/LugsoIn2/cad-admin-ui-service.git --output cad-admin-ui-service.zip

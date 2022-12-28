@@ -17,13 +17,13 @@ Alternativ sind auch Umgebungsvariablen möglich die mit dem Prefix TF_VAR_ erst
 Before the infrastructure can be set up, an initalsetup of Terraform must be performed. This includes the state backend of Terraform on Amazon AWS S3 and dynamoDB with the default workspace from Terraform. (in our case it's be done)
 
 This can be done with:
-```sh
+```
 terraform -chdir=./tf_main_setup
 ```
 
 Container registry repositories also had to be created in Amazon AWS ECR for the container services. These are automatically populated by the GitHub CI pipeline. 
 This can be done after the initalsetup with:
-```sh
+```
 terraform workspace new ecr_repos
 terraform -chdir=./tf_main_setup
 ```
@@ -34,19 +34,19 @@ Asumed that the Terraform workspace of the productive environment (free) has alr
 Customer ID's must start with a letter. (k8s dependencie)
 
 **Productive environment**
-```sh
+```
 terraform -chdir=./prod init
 terraform -chdir=./prod workspace select prod
 terraform -chdir=./prod apply
 ```
 **Standard customer environment**
-```sh
+```
 terraform -chdir=./subsc_standard init
 terraform -chdir=./subsc_standard workspace new <Customer_ID>
 terraform -chdir=./subsc_standard apply
 ```
 **Enterprise customer environment**
-```sh
+```
 terraform -chdir=./subsc_enterprise init
 terraform -chdir=./subsc_enterprise workspace new <Customer_ID>
 terraform -chdir=./subsc_enterprise apply
@@ -64,6 +64,6 @@ For customer here are TF_workspacename = Customer_ID
 | adminservice      | <TF_workspacename>-adminservice.aws.netpy.de       |
 
 ## Switch between workspaces
-```sh
+```
 terraform workspaces select <workspace>
 ```

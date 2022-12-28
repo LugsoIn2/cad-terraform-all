@@ -33,11 +33,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # - name: Download GitHub releases
-      #   working-directory: ./local_helper/
-      #   run: |
-      #    chmod +x ./download-gh-releases.sh
-      #    ./download-gh-releases.sh
+      - name: Download GitHub releases
+        working-directory: ./local_helper/
+        run: |
+         chmod +x ./*.sh
 
       - name: Terraform Init
         id: init

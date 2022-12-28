@@ -15,4 +15,5 @@ resource "helm_release" "eventservice" {
   }
   namespace = var.release_name_and_namespace_k8s_eventservice
   create_namespace = true
+  dependency_update = true
 }

@@ -65,6 +65,8 @@ jobs:
         working-directory: ./local_helper/
         run: |
          ls -la
+         ls -ls tmp_prod_userservice
+         ls -ls tmp_prod_userservice/dist
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'

@@ -28,7 +28,7 @@ fi
 echo test1
 mkdir -p tmp_$CUSTOMER_NR\_admin_ui
 cd tmp_$CUSTOMER_NR\_admin_ui
-#echo $GH_TOKEN | gh auth login --with-token
+echo $GH_TOKEN | gh auth login --with-token
 echo test2
 # Admin UI Service
 gh release download --archive zip --clobber --repo https://github.com/LugsoIn2/cad-admin-ui-service.git --output cad-admin-ui-service.zip

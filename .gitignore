@@ -113,5 +113,6 @@ userservice*.zip
 local_helper/userservice
 admin_ui_service.zip
 local_helper/admin_ui_service
+local_helper/tmp*
 
 values.secret.yaml

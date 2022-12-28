@@ -20,3 +20,14 @@ variable "dist_assets_directory_adm_ui_service" {
   type = string
   #default = "../../dist/assets"
 }
+
+variable "https_enabled_adm_ui_service" {
+  description = "backend url https enabled. enabled = 1, disabled = 0 (default: 0)"
+  type = number
+  default = 0
+}
+
+variable "backend_servicename_adm_ui_service" {
+  description = "backend servicename for the admin ui service"
+  type = string
+}

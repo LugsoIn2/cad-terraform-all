@@ -27,3 +27,7 @@ dependencies:
 - name: eventservice
   version: "0.1.0"
   repository: "file://../service_modules/eventservice/"
+
+- name: adminservice
+  version: "0.1.0"
+  repository: "file://../service_modules/adminservice/"

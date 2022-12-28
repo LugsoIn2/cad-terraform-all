@@ -1,6 +1,6 @@
 dependencies:
 - name: eventservice
-  repository: file://../eventservice/
+  repository: file://../service_modules/eventservice/
   version: 0.1.0
-digest: sha256:6e30906fe66545099c72beb66d2e449efde901f10414324922020bcdfa9ae0a0
-generated: "2022-12-28T12:29:14.08813+01:00"
+digest: sha256:a0b390917a0e455506eec69dd1b5528aa90dd5488e79a48933c779ad51851096
+generated: "2022-12-28T21:19:36.153615+01:00"

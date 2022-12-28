@@ -36,7 +36,7 @@ unzip -o cad-event-userservice.zip -d ./
 cd cad-event-userservice*
 npm install
 echo $VITE_API_ENVVAR > .env
-npm run build
+npm run build --if-present
 cp -R dist ../
 cd ../
 rm -rf cad-event-userservice*

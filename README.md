@@ -1,5 +1,8 @@
 # cad-terraform-all 
 
+## Terraform
+We use a terraform setup with global state management over AWS S3 Backend.
+
 ## Commands for creaton
 In the working directories must be a secrets.auto.tfvar with the following content.
 Alternativ sind auch Umgebungsvariablen möglich die mit dem Prefix TF_VAR_ erstellt werden. (recommended way for the Adminservice Container).
@@ -59,17 +62,6 @@ For customer here are TF_workspacename = Customer_ID
 | eventservice      | <TF_workspacename>-eventservice.aws.netpy.de       |
 | admin-ui-service  | <TF_workspacename>-admin-ui-service.aws.netpy.de   |
 | adminservice      | <TF_workspacename>-adminservice.aws.netpy.de       |
-
-
-## Terraform
-We use a terraform setup with global state management over AWS S3 Backend.
-### Terraform Workspaces
-ATTENTION: tf_main_setup = "default" workspace
-
-ecr_repos = "ecr_repos" workspace
-prod = "prod" workspace (production env)
-
-For all new services for customer, use the uid as workspace name
 
 ## Switch between workspaces
 ```sh

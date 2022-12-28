@@ -6,12 +6,12 @@ then
     echo "please install the github cli tool gh"
     exit
 fi
-if ! command -v npm &> /dev/null
-then
-    echo "the dependency npm could not be found"
-    echo "please install npm"
-    exit
-fi
+# if ! command -v npm &> /dev/null
+# then
+#     echo "the dependency npm could not be found"
+#     echo "please install npm"
+#     exit
+# fi
 
 
 GH_TOKEN=$1
@@ -28,7 +28,7 @@ fi
 
 mkdir -p tmp_$CUSTOMER_NR\_userservice
 cd tmp_$CUSTOMER_NR\_userservice
-#echo $GH_TOKEN | gh auth login --with-token
+echo $GH_TOKEN | gh auth login --with-token
 
 # Admin Userservice
 gh release download --archive zip --clobber --repo https://github.com/LugsoIn2/cad-event-userservice.git --output cad-event-userservice.zip

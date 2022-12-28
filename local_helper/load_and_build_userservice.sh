@@ -28,7 +28,7 @@ fi
 
 mkdir -p tmp_$CUSTOMER_NR\_userservice
 cd tmp_$CUSTOMER_NR\_userservice
-echo $GH_TOKEN | gh auth login --with-token
+#echo $GH_TOKEN | gh auth login --with-token
 
 # Admin Userservice
 gh release download --archive zip --clobber --repo https://github.com/LugsoIn2/cad-event-userservice.git --output cad-event-userservice.zip

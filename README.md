@@ -3,34 +3,59 @@
 ## Terraform
 We use a terraform setup with global state management over AWS S3 Backend.
 
-## Commands for creaton
+## Initial Setup
 In the working directories must be a secrets.auto.tfvar with the following content.
-Alternativ sind auch Umgebungsvariablen möglich die mit dem Prefix TF_VAR_ erstellt werden. (recommended way for the Adminservice Container).
+Alternatively, environment variables can be created with the prefix TF_VAR_. (recommended for the Adminservice Container).
 
 
-| Var-Name      | value             |
-| ------------- | ----------------- |
-| access_key    | aws_key_id        |
-| secret_key    | aws_secret_key    |
-| gh_token      | GitHub PAC Token  |
+| TF_VAR_ Prefix    | Var-Name              | value                         |
+| ----------------- | --------------------- | ----------------------------- |
+|         x         | access_key            | aws_key_id                    |
+|         x         | secret_key            | aws_secret_key                |
+|         x         | gh_token              | GitHub PAC Token              |
+|                   | AWS_ACCESS_KEY_ID     | aws_key_id_for_tfbackend      |
+|                   | AWS_SECRET_ACCESS_KEY | aws_secret_key_for_tfbackend  |
 
-Before the infrastructure can be set up, an initalsetup of Terraform must be performed. This includes the state backend of Terraform on Amazon AWS S3 and dynamoDB with the default workspace from Terraform. (in our case it's be done)
+
+### Terrafrom Backend S3 (tf_main_setup) (DONE_FOR_US)
+Before the infrastructure can be set up, an initalsetup of Terraform must be performed. This includes the state backend of Terraform on Amazon AWS S3 and dynamoDB with the default workspace from Terraform.
 
 This can be done with:
 ```
-terraform -chdir=./tf_main_setup
+terraform apply -chdir=./tf_main_setup
 ```
+Info: For the first creation you must comment out the S3 backend Provider block. After this creaton you can uncomment the block and migrate from local state file to S3.
 
-Container registry repositories also had to be created in Amazon AWS ECR for the container services. These are automatically populated by the GitHub CI pipeline. 
+### Container Registry Repositories (tf_ecr_repos) (DONE_FOR_US)
+Container registry repositories also had to be created in Amazon AWS ECR for the container services. These are automatically populated by the GitHub CI pipeline.
 This can be done after the initalsetup with:
 ```
 terraform workspace new ecr_repos
-terraform -chdir=./tf_main_setup
+terraform apply -chdir=./tf_ecr_repos
 ```
 
+### Setup AWS Elastic Kubernetes Cluster (k8s_eks_setup)
+This setup creates a new AWS EKS cluster and deploys an nginx ingress controller on the cluster, preceded by an AWS Network Load Balancer. It also deploys an externel-dns service on the cluster that synchronizes the Kubernetes internal DNS records to the external AWS Route53 DNS service for a specific hostet Zone (aws.netpy.de).
+
+**INFO**
+For cost reasons please destroy after developing or testing. For a AWS clean destroy please make sure you had destroyed all applied services with another Script before you destroy the cluster. 
+
+**Apply**
+```
+terraform workspace new eks_cluster
+terraform apply -chdir=./k8s_eks_setup
+```
+Info: if the workspace exists use the workspace select command.
+
+**Destroy**
+```
+terraform destroy -chdir=./k8s_eks_setup
+```
+
+### Commands for the Environments
 
 Following commands are for the infrastructure:
-Asumed that the Terraform workspace of the productive environment (free) has already been created. (terraform workspace new prod).
+Asumed that the Terraform workspace of the productive environment (free) has already been created. (terraform workspace new prod). **(in our case it's be done)**
 Customer ID's must start with a letter. (k8s dependencie)
 
 **Productive environment**

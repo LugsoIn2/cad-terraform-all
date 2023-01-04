@@ -1,5 +1,5 @@
 resource "helm_release" "adminservice" {
-  name       = var.release_name_and_namespace_k8s_adminservice
+  name       = "${var.release_name_and_namespace_k8s_adminservice}-adminservice"
   chart      = "../helm/adminservice"
   set {
     name  = "env.secret.AWS_ACCESS_KEY"

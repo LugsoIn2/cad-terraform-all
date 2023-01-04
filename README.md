@@ -1,19 +1,55 @@
+# Quick start Guide (use GitHub Actions on Github.com)
+(comming soon for easy to use)
+1. Repo: cad-terraform-all - run manually action: Deploy_EKS_Cluster
+2. Repo: *service_repo - develop and push to main
+   
+or
+
+2. Repo: cad-terraform-all - run manually action Deploy_Production
+3. Make your App testings
+4. Repo: cad-terraform-all - run manually action: Destroy_EKS_Cluster
+
 # Terraform
 We use a terraform setup with global state management over AWS S3 Backend.
 
-
 # Initial Setup
+## Environment Variables and Secrets
 In the working directories must be a secrets.auto.tfvar with the following content.
 Alternatively, environment variables can be created with the prefix TF_VAR_. (recommended for the Adminservice Container).
 
-| TF_VAR_ Prefix    | Var-Name              | value                         |
-| ----------------- | --------------------- | ----------------------------- |
-|         x         | access_key            | aws_key_id                    |
-|         x         | secret_key            | aws_secret_key                |
-|         x         | gh_token              | GitHub PAC Token              |
-|                   | AWS_ACCESS_KEY_ID     | aws_key_id_for_tfbackend      |
-|                   | AWS_SECRET_ACCESS_KEY | aws_secret_key_for_tfbackend  |
+| can TF_VAR_ Prefix    | Var-Name              | value                         |
+| --------------------- | --------------------- | ----------------------------- |
+|         x             | access_key            | aws_key_id                    |
+|         x             | secret_key            | aws_secret_key                |
+|         x             | gh_token              | GitHub PAC Token              |
+|                       | AWS_ACCESS_KEY_ID     | aws_key_id_for_tfbackend      |
+|                       | AWS_SECRET_ACCESS_KEY | aws_secret_key_for_tfbackend  |
 
+
+
+Only for the [EKS Setup](#Setup-AWS-Elastic-Kubernetes-Cluster-(k8s_eks_setup)) the variables must be following:
+
+| can TF_VAR_ Prefix  | Var-Name                   | value                         |
+| --------------------| -------------------------- | ----------------------------- |
+|         x           | access_key                 | aws_key_id                    |
+|         x           | secret_key                 | aws_secret_key                |
+|         x           | domainname_external_dns    | route53_domain                |
+|         x           | hostedzoneid_external_dns  | zone_id_from_route53          |
+|         x           | map_aws_eks_auth_iam_users | [see here](#Value-from-map_aws_eks_auth_iam_users) |
+
+
+### Value from map_aws_eks_auth_iam_users
+The value of the variable "map_aws_eks_auth_iam_users" must be:
+``` json
+[
+    {
+    userarn  = "arn_from_aws_iam_user"
+    username = "username_from_aws_iam_user"
+    groups   = ["system:masters"]
+    },
+    ...
+]
+```
 
 ## Terrafrom Backend S3 (tf_main_setup) (DONE_FOR_US)
 Before the infrastructure can be set up, an initalsetup of Terraform must be performed. This includes the state backend of Terraform on Amazon AWS S3 and dynamoDB with the default workspace from Terraform.
@@ -39,6 +75,8 @@ This setup creates a new AWS EKS cluster and deploys an nginx ingress controller
 
 **INFO**
 For cost reasons please destroy after developing or testing.
+
+
 
 **Apply**
 ```

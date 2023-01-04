@@ -1,9 +1,12 @@
+{{- $fullName := include "adminservice.fullname" . -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "adminservice.fullname" . }}
   labels:
     {{- include "adminservice.labels" . | nindent 4 }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "{{ $fullName }}.aws.netpy.de"
 spec:
   type: {{ .Values.service.type }}
   ports:

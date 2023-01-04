@@ -1,13 +1,7 @@
 locals {
     cl_subnet_ids = [ "subnet-0fc4b0b34837ba485","subnet-0bd6a11fdeb24a3c8","subnet-07c3d749d8eaadd26" ]
-    #cl_subnet_ids = module.vpc.private_subnets
     cl_vpc_id = "vpc-0ce0e6a6d4780b78b"
-    #cl_vpc_id = module.vpc.vpc_id
-    #data.aws_eks_cluster.oidc_provider
-    #oicd_prov = data.aws_eks_cluster.oicd_provider
     cluster_name = "CAD-Event"
-    #test = module.eks.oidc_provider
-    #module.cluster.identity.0.oidc.0.issuer
 }
 
 data "aws_availability_zones" "azs" {
@@ -66,14 +60,6 @@ output "test1234" {
     value = module.eks.node_security_group_arn
 }
 
-# data "aws_eks_cluster" "oicd_arn" {
-#     name = module.eks.oidc_provider_arn
-# }
-
-# data "aws_eks_cluster" "oicd_provider" {
-#     name = module.eks.cluster_oidc_issuer_url
-# }
-
 data "aws_eks_cluster" "default" {
   name = module.eks.cluster_id
 }
@@ -81,9 +67,3 @@ data "aws_eks_cluster" "default" {
 data "aws_eks_cluster_auth" "default" {
   name = module.eks.cluster_id
 }
-
-
-# variable "test1234" {
-#     type = string
-#     default = data.aws_eks_cluster.oidc_provider_arn
-# }

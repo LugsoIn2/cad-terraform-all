@@ -55,11 +55,6 @@ module "eks"{
     aws_auth_users = var.map_aws_eks_auth_iam_users
 }
 
-
-output "test1234" {
-    value = module.eks.node_security_group_arn
-}
-
 data "aws_eks_cluster" "default" {
   name = module.eks.cluster_id
 }

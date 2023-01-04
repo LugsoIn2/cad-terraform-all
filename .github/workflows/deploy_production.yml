@@ -8,6 +8,7 @@ env:
  TF_VAR_gh_token: ${{ secrets.ACTIONS_KEY }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+ AWS_REGION: eu-central-1
  #GITHUB_TOKEN: ${{ secrets.ACTIONS_KEY }}
  #TF_LOG: "TRACE"
 
@@ -26,6 +27,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+        
+      - name: Check if EKS-Cluster CAD-Event is created
+        working-directory: ./local_helper/
+        run: |
+          chmod +x eks_cluster_check.sh
+          ./eks_cluster_check.sh
     
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
@@ -81,7 +95,7 @@ jobs:
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
 
-      - name: Terraform Apply
-       #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-       #run: terraform apply -auto-approve -input=false -var-file="./prod.tfvars"
-        run: terraform apply -auto-approve -input=false
+      # - name: Terraform Apply
+      #  #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #  #run: terraform apply -auto-approve -input=false -var-file="./prod.tfvars"
+      #   run: terraform apply -auto-approve -input=false

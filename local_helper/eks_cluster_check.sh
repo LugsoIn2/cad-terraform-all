@@ -1,5 +1,5 @@
 #!/bin/bash
-CLUSTER=CAD-Event-2
+CLUSTER=CAD-Event
 
 CHECK_NAME=$(aws eks list-clusters | jq -r ".clusters" | grep $CLUSTER || true)
 

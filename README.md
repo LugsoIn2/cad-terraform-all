@@ -38,7 +38,7 @@ terraform apply -chdir=./tf_ecr_repos
 This setup creates a new AWS EKS cluster and deploys an nginx ingress controller on the cluster, preceded by an AWS Network Load Balancer. It also deploys an externel-dns service on the cluster that synchronizes the Kubernetes internal DNS records to the external AWS Route53 DNS service for a specific hostet Zone (aws.netpy.de).
 
 **INFO**
-For cost reasons please destroy after developing or testing. For a AWS clean destroy please make sure you had destroyed all applied services with another Script before you destroy the cluster. 
+For cost reasons please destroy after developing or testing.
 
 **Apply**
 ```

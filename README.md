@@ -1,5 +1,5 @@
 # Quick start Guide (use GitHub Actions on Github.com)
-(comming soon for easy to use)
+(comming soon - not tested - for easy to use)
 1. Repo: cad-terraform-all - run manually action: Deploy_EKS_Cluster
 2. Repo: *service_repo - develop and push to main
    
@@ -8,6 +8,13 @@ or
 2. Repo: cad-terraform-all - run manually action Deploy_Production
 3. Make your App testings
 4. Repo: cad-terraform-all - run manually action: Destroy_EKS_Cluster
+
+**Info:**
+for local configuration your .kube config after cluster deploy run following:
+(aws cli must be installed and configured)
+```
+aws eks update-kubeconfig --region eu-central-1 --name CAD-Event
+```
 
 # Terraform
 We use a terraform setup with global state management over AWS S3 Backend.

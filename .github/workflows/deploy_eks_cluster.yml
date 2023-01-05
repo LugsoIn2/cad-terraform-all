@@ -1,11 +1,12 @@
-name: Deploy_Production
-#on: [repository_dispatch]
+name: Deploy_EKS_Cluster
 on: workflow_dispatch
 
 env:
  TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
  TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- TF_VAR_gh_token: ${{ secrets.ACTIONS_KEY }}
+ TF_VAR_domainname_external_dns: "aws.netpy.de"
+ TF_VAR_hostedzoneid_external_dns: ${{ secrets.ROUTE53_ZONE_ID }}
+ TF_VAR_map_aws_eks_auth_iam_users: ${{ secrets.MAP_EKS_IAM_USERS }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  AWS_REGION: eu-central-1
@@ -15,14 +16,11 @@ env:
 
 jobs:
   terraform:
-    name: "Github cli and Terraform"
+    name: "AWS EKS deploy Terraform"
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [19.3.0]
     defaults:
       run:
-        working-directory: ./prod/
+        working-directory: ./k8s_eks_setup/
     
     steps:
       - name: Checkout
@@ -39,15 +37,10 @@ jobs:
         working-directory: ./local_helper/
         run: |
           chmod +x eks_cluster_check.sh
-          ./eks_cluster_check.sh deploy-services
+          ./eks_cluster_check.sh deploy-cluster
     
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - name: Terraform Init
         id: init
@@ -59,11 +52,11 @@ jobs:
 
       - name: Terraform workspace
         id: workspace
-        run: terraform workspace select prod
+        run: terraform workspace select eks_cluster
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -no-color -input=false
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
       
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve -input=false

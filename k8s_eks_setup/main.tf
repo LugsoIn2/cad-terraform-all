@@ -29,6 +29,7 @@ module "eks"{
             max_size     = 1
             min_size     = 1
             desired_size = 1
+            # please see this: https://github.com/awslabs/amazon-eks-ami/blob/master/files/eni-max-pods.txt
             instance_types = ["t3.large"] #for free use t2.micro, t3.medium=17Pods t3.large=35 Pods
             #additional_security_group_ids = [aws_security_group.worker_group_one.id]
 

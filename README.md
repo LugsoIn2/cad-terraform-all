@@ -1,5 +1,5 @@
-# Quick start Guide (use GitHub Actions on Github.com)
-(comming soon - not tested - for easy to use)
+# Quick start Guide for Production deploy (use GitHub Actions on Github.com)
+(because cost reasons on AWS)
 1. Repo: cad-terraform-all - run manually action: Deploy_EKS_Cluster
 2. Repo: *service_repo - develop and push to main
    
@@ -7,10 +7,12 @@ or
 
 2. Repo: cad-terraform-all - run manually action Deploy_Production
 3. Make your App testings
-4. Repo: cad-terraform-all - run manually action: Destroy_EKS_Cluster
+4. (Repo: cad-terraform-all - run manually action: Destroy_Production)
+5. Repo: cad-terraform-all - run manually action: Destroy_EKS_Cluster
 
 **Info:**
-for local configuration your .kube config after cluster deploy run following:
+- The Cluster creation take 10-15min
+- For local configuration your .kube config after cluster deploy run following:
 (aws cli must be installed and configured)
 ```
 aws eks update-kubeconfig --region eu-central-1 --name CAD-Event
@@ -81,7 +83,8 @@ terraform apply -chdir=./tf_ecr_repos
 This setup creates a new AWS EKS cluster and deploys an nginx ingress controller on the cluster, preceded by an AWS Network Load Balancer. It also deploys an externel-dns service on the cluster that synchronizes the Kubernetes internal DNS records to the external AWS Route53 DNS service for a specific hostet Zone (aws.netpy.de).
 
 **INFO**
-For cost reasons please destroy after developing or testing.
+- The Cluster creation take 10-15min
+- For cost reasons please destroy after developing or testing.
 
 
 

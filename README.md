@@ -7,7 +7,7 @@ or
 
 2. Repo: cad-terraform-all - run manually action Deploy_Production
 3. Make your App testings
-4. (Repo: cad-terraform-all - run manually action: Destroy_Production)
+4. Repo: cad-terraform-all - run manually action: Destroy_Production (not tested but should work)
 5. Repo: cad-terraform-all - run manually action: Destroy_EKS_Cluster
 
 **Info:**

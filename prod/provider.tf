@@ -31,6 +31,7 @@ provider "helm" {
   # for test on local Kubernetes Cluster path to config
   # kubernetes {
   #   config_path = "~/.kube/config"
+  #   config_context = "docker-desktop"
   # }
   kubernetes {
     host                   = data.aws_eks_cluster.eks-cad-event-cluster.endpoint

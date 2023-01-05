@@ -28,6 +28,7 @@ data "aws_eks_cluster_auth" "eks-cad-event-cluster-auth" {
   name = "CAD-Event"
 }
 provider "helm" {
+  # for test on local Kubernetes Cluster path to config
   # kubernetes {
   #   config_path = "~/.kube/config"
   # }

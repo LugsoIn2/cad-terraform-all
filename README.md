@@ -17,6 +17,7 @@ or
 ```
 aws eks update-kubeconfig --region eu-central-1 --name CAD-Event
 ```
+<br /><br /><br /><br />
 
 # Terraform
 We use a terraform setup with global state management over AWS S3 Backend.
@@ -34,7 +35,7 @@ Alternatively, environment variables can be created with the prefix TF_VAR_. (re
 |                       | AWS_ACCESS_KEY_ID     | aws_key_id_for_tfbackend      |
 |                       | AWS_SECRET_ACCESS_KEY | aws_secret_key_for_tfbackend  |
 
-
+<br /><br /><br />
 
 Only for the [EKS Setup](#Setup-AWS-Elastic-Kubernetes-Cluster-(k8s_eks_setup)) the variables must be following:
 
@@ -46,6 +47,7 @@ Only for the [EKS Setup](#Setup-AWS-Elastic-Kubernetes-Cluster-(k8s_eks_setup)) 
 |         x           | hostedzoneid_external_dns  | zone_id_from_route53          |
 |         x           | map_aws_eks_auth_iam_users | [see here](#Value-from-map_aws_eks_auth_iam_users) |
 
+<br /><br /><br />
 
 ### Value from map_aws_eks_auth_iam_users
 The value of the variable "map_aws_eks_auth_iam_users" must be:
@@ -59,6 +61,7 @@ The value of the variable "map_aws_eks_auth_iam_users" must be:
     ...
 ]
 ```
+<br /><br /><br />
 
 ## Terrafrom Backend S3 (tf_main_setup) (DONE_FOR_US)
 Before the infrastructure can be set up, an initalsetup of Terraform must be performed. This includes the state backend of Terraform on Amazon AWS S3 and dynamoDB with the default workspace from Terraform.
@@ -69,6 +72,7 @@ terraform apply -chdir=./tf_main_setup
 ```
 Info: For the first creation you must comment out the S3 backend Provider block. After this creaton you can uncomment the block and migrate from local state file to S3.
 
+<br /><br /><br />
 
 ## Container Registry Repositories (tf_ecr_repos) (DONE_FOR_US)
 Container registry repositories also had to be created in Amazon AWS ECR for the container services. These are automatically populated by the GitHub CI pipeline.
@@ -78,6 +82,7 @@ terraform workspace new ecr_repos
 terraform apply -chdir=./tf_ecr_repos
 ```
 
+<br /><br /><br />
 
 ## Setup AWS Elastic Kubernetes Cluster (k8s_eks_setup)
 This setup creates a new AWS EKS cluster and deploys an nginx ingress controller on the cluster, preceded by an AWS Network Load Balancer. It also deploys an externel-dns service on the cluster that synchronizes the Kubernetes internal DNS records to the external AWS Route53 DNS service for a specific hostet Zone (aws.netpy.de).
@@ -86,25 +91,30 @@ This setup creates a new AWS EKS cluster and deploys an nginx ingress controller
 - The Cluster creation take 10-15min
 - For cost reasons please destroy after developing or testing.
 
-
+<br />
 
 **Apply**
 ```
 terraform workspace new eks_cluster
 terraform apply -chdir=./k8s_eks_setup
 ```
-Info: if the workspace exists use the workspace select command.
+**Info:** if the workspace exists use the workspace select command.
+
+<br />
 
 **Destroy**
 ```
 terraform destroy -chdir=./k8s_eks_setup
 ```
 
+<br /><br /><br />
 
 ## Commands for the Environments
 Following commands are for the infrastructure:
 Asumed that the Terraform workspace of the productive environment (free) has already been created. (terraform workspace new prod). **(in our case it's be done)**
 Customer ID's must start with a letter. (k8s dependencie)
+
+<br />
 
 **Productive environment**
 ```
@@ -112,18 +122,25 @@ terraform -chdir=./prod init
 terraform -chdir=./prod workspace select prod
 terraform -chdir=./prod apply
 ```
+<br />
+
 **Standard customer environment**
 ```
 terraform -chdir=./subsc_standard init
 terraform -chdir=./subsc_standard workspace new <Customer_ID>
 terraform -chdir=./subsc_standard apply
 ```
+
+<br />
+
 **Enterprise customer environment**
 ```
 terraform -chdir=./subsc_enterprise init
 terraform -chdir=./subsc_enterprise workspace new <Customer_ID>
 terraform -chdir=./subsc_enterprise apply
 ```
+
+<br /><br /><br /><br />
 
 # Service Domain names 
 Domain names are automatically created for all services. 
@@ -136,6 +153,7 @@ For customer here are TF_workspacename = Customer_ID
 | admin-ui-service  | <TF_workspacename>-admin-ui-service.aws.netpy.de   |
 | adminservice      | <TF_workspacename>-adminservice.aws.netpy.de       |
 
+<br /><br /><br /><br />
 
 # Switch between workspaces
 ```

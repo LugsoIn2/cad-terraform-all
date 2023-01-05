@@ -1,5 +1,9 @@
 # Quick start Guide for Production deploy (use GitHub Actions on Github.com)
-(because cost reasons on AWS)
+(because cost reasons on AWS)<br />
+Will you execute terraform localy without github actions see [the Terraform sections below](#Terraform)
+
+<br />
+
 1. Repo: cad-terraform-all - run manually action: Deploy_EKS_Cluster
 2. Repo: *service_repo - develop and push to main
    

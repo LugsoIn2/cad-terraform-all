@@ -47,11 +47,11 @@ Only for the [EKS Setup](#Setup-AWS-Elastic-Kubernetes-Cluster-(k8s_eks_setup)) 
 |         x           | hostedzoneid_external_dns  | zone_id_from_route53          |
 |         x           | map_aws_eks_auth_iam_users | [see here](#Value-from-map_aws_eks_auth_iam_users) |
 
-<br /><br /><br />
+<br /><br />
 
 ### Value from map_aws_eks_auth_iam_users
-The value of the variable "map_aws_eks_auth_iam_users" must be:
-``` json
+The value of the variable "map_aws_eks_auth_iam_users" should be:
+``` sh
 [
     {
     userarn  = "arn_from_aws_iam_user"

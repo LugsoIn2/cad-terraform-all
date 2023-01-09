@@ -21,9 +21,9 @@ HTTPS_ENABLED=$4
 
 
 if [ $HTTPS_ENABLED -eq 1 ]; then
-    VITE_API_ENVVAR="VITE_API_ENDPOINT=https://$CUSTOMER_NR$SERVICENAME.aws.netpy.de:443"
+    VITE_API_ENVVAR="VITE_API_ENDPOINT=https://$CUSTOMER_NR$SERVICENAME.aws.netpy.de/api:443"
 else
-    VITE_API_ENVVAR="VITE_API_ENDPOINT=http://$CUSTOMER_NR$SERVICENAME.aws.netpy.de:80"
+    VITE_API_ENVVAR="VITE_API_ENDPOINT=http://$CUSTOMER_NR$SERVICENAME.aws.netpy.de/api:80"
 fi
 mkdir -p tmp_$CUSTOMER_NR\_admin_ui
 cd tmp_$CUSTOMER_NR\_admin_ui

@@ -26,6 +26,9 @@ resource "aws_s3_bucket_website_configuration" "static_web_bucket-config" {
   index_document {
     suffix = "index.html"
   }
+  error_document {
+    suffix = "index.html"
+  }
 
 }
 

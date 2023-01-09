@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: 150625325991.dkr.ecr.eu-central-1.amazonaws.com/cad-eventservice
-  pullPolicy: IfNotPresent
+  pullPolicy: Allways
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 

@@ -23,9 +23,9 @@ module "eks"{
     }
     #vpc_id = module.vpc.vpc_id
     vpc_id = local.cl_vpc_id
-
     eks_managed_node_groups = {
         eks-cl-group1 = {
+            iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
             max_size     = 1
             min_size     = 1
             desired_size = 1
@@ -39,9 +39,11 @@ module "eks"{
                 "k8s.io/cluster-autoscaler/enabled" = true
             }
         }
+        
     }
 
     node_security_group_additional_rules = {
+
         ingress_nodes_karpenter_port = {
             description                   = "Cluster API to Node group for Karpenter webhook"
             protocol                      = "tcp"

@@ -10,10 +10,17 @@ data "kubectl_file_documents" "ingress_nginx_manifest_split" {
   ]
 }
 
-# apply each resource from the yaml
-resource "kubectl_manifest" "ingress_nginx_resource" {
+# NameSpace
+resource "kubectl_manifest" "ingress_nginx_resource_namespace" {
   depends_on = [module.eks, data.kubectl_file_documents.ingress_nginx_manifest_split]
-  for_each   = data.kubectl_file_documents.ingress_nginx_manifest_split.manifests
+  yaml_body   = element(data.kubectl_file_documents.ingress_nginx_manifest_split.manifests, 0)
+}
+
+# Each manifest after namespace
+resource "kubectl_manifest" "ingress_nginx_resource_other" {
+  count = length(data.kubectl_file_documents.ingress_nginx_manifest_split.manifests)
+  depends_on = [resource.kubectl_manifest.ingress_nginx_resource_namespace]
+  for_each   = slice(data.kubectl_file_documents.ingress_nginx_manifest_split.manifests, 1, count.index)
   yaml_body  = each.value
 }
 

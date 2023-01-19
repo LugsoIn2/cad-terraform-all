@@ -9,3 +9,11 @@ variable "secret_key" {
 variable "gh_token" {
     sensitive   = true
 }
+
+variable "db_username" {
+    sensitive   = true
+}
+
+variable "db_password" {
+    sensitive   = true
+}

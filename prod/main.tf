@@ -60,3 +60,10 @@ module "prod-event-table" {
       "Environment" = "Prod"
     }
 }
+
+module "prod-admin-table" {
+  source = "./../service_modules/tf_admintableservice/prod"
+  dbname = "${terraform.workspace}_admintable"
+  db_username = var.db_username
+  db_password = var.db_password
+}

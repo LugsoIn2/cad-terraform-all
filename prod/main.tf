@@ -40,3 +40,18 @@ module "prod-adminservice" {
   access_key = var.access_key
   secret_key = var.secret_key
 }
+module "prod-tenants-database"{
+  source = "./../service_modules/tf_tenanttableservice/prod"
+  dbname = "${terraform.workspace}_tenants"
+  tags_tenatns-database = {
+      "Environment" = "Prod"
+    }
+}
+
+module "prod-event-table" {
+  source = "./../service_modules/tf_eventtableservice/prod"
+  dbname = "${terraform.workspace}_event_table"
+  tags_eventtable-database = {
+      "Environment" = "Prod"
+    }
+}

@@ -1,5 +1,5 @@
-resource "aws_dynamodb_table" "event_tableblatest" {
-  name               = var.dynamo_table_name
+resource "aws_dynamodb_table" "event_table" {
+  name               = var.dbname
   billing_mode       = "PROVISIONED"
   read_capacity      = "30"
   write_capacity     = "30"
@@ -20,23 +20,17 @@ resource "aws_dynamodb_table" "event_tableblatest" {
     name = "city"
     type = "S"
   }
-
+ 
   ttl {
     enabled        = false
     attribute_name = "TimeToExist"
   }
 
-global_secondary_index {
+  global_secondary_index {
     name               = "eventDate-index"
     hash_key           = "eventDate"
-    #range_key          = "date"
     write_capacity     = 30
     read_capacity      = 30
-    projection_type    = "INCLUDE"
-    #non_key_attributes = ["dateString"]
+    projection_type    = "ALL"
   }
-
-
-  tags = var.dynamo_table_tags
-
 }

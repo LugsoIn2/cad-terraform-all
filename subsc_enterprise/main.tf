@@ -1,3 +1,7 @@
+locals {
+ prod_ev_table_name = "${terraform.workspace}_event_table"
+}
+
 module "prod-userservice" {
   source = "./../service_modules/tf_userservice/prod/"
   bucket_name_userservice = "userservice"
@@ -13,16 +17,18 @@ module "prod-userservice" {
   gh_token = var.gh_token
 }
 module "prod-eventservice" {
-  source = "./../service_modules/tf_dynamodb_tenants/prod/"
+  source = "./../service_modules/tf_eventservice/prod/"
   release_name_and_namespace_k8s_eventservice = terraform.workspace
   allowed_hosts_eventservice = "${terraform.workspace}-eventservice.aws.netpy.de"
+  ev_table_name = local.prod_ev_table_name
   access_key = var.access_key
   secret_key = var.secret_key
 }
-module "prod-dynamodb-eventservice"{
+module "prod-event-table" {
   source = "./../service_modules/tf_eventtableservice/prod"
-  dbname = "${terraform.workspace}_event_table"
+  dbname = local.prod_ev_table_name
   tags_eventtable-database = {
-      "Environment" = "Prod"
+      "Environment" = "Subscription_Enterprise"
+      "Customer" = "${terraform.workspace}"
     }
 }

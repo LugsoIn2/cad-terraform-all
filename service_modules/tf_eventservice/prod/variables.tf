@@ -8,3 +8,8 @@ variable "release_name_and_namespace_k8s_eventservice" {
     description = "k8s namespace and helm release name eventservice (kd-nr for us)"
     type = string
 }
+
+variable "ev_table_name" {
+    description = "The name of the event_table"
+    type = string
+}

@@ -13,6 +13,10 @@ resource "helm_release" "eventservice" {
     name  = "env.secret.ALLOWED_HOSTS"
     value = replace("${var.allowed_hosts_eventservice}", ",", "\\,")
   }
+  set {
+    name = "env.secret.EV_TABLE_NAME"
+    value = var.ev_table_name
+  }
   namespace = var.release_name_and_namespace_k8s_eventservice
   create_namespace = true
   dependency_update = true

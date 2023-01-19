@@ -3,7 +3,7 @@ variable "dbname" {
     type = string
     default = "tenants" 
 }
-variable "tags_tenatns-database" {
+variable "tags_tenants-database" {
   description = "Key-Value maps for Environment"
     type = map(string)
     default = {}

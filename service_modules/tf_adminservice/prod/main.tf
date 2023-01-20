@@ -15,7 +15,7 @@ resource "helm_release" "adminservice" {
   }
   # set {
   #   name  = "env.secret.ADMINTABLE_ENDPOINT"
-  #   value = data.ws_db_instance.endpoint_var
+  #   value = var.adminservicetable_endpoint
   # }
   namespace = var.release_name_and_namespace_k8s_adminservice
   create_namespace = true

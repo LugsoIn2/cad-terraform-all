@@ -1,4 +1,4 @@
-resource "aws_db_instance" "default" {
+resource "aws_db_instance" "rds_admintable" {
   allocated_storage    = 10
   db_name              = var.dbname
   engine               = "mysql"
@@ -11,8 +11,3 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot  = true
 
 }
-
-
-# data "aws_db_instance" "endpoint_var" {
-#   name = aws_db_instance.default.address
-# }

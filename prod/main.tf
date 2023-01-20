@@ -42,8 +42,12 @@ module "prod-adminservice" {
   source = "./../service_modules/tf_adminservice/prod/"
   release_name_and_namespace_k8s_adminservice = terraform.workspace
   allowed_hosts_adminservice = "${terraform.workspace}-adminservice.aws.netpy.de"
+  #adminservicetable_endpoint = data.aws_db_instance.endpoint_var
   access_key = var.access_key
   secret_key = var.secret_key
+  # depends_on = [
+  #   module.prod-admin-table
+  # ]
 }
 module "prod-tenants-database"{
   source = "./../service_modules/tf_tenanttableservice/prod"
@@ -66,4 +70,8 @@ module "prod-event-table" {
 #   dbname = "${terraform.workspace}_admintable"
 #   db_username = var.db_username
 #   db_password = var.db_password
+# }
+
+# data "aws_db_instance" "endpoint_var" {
+#   name = aws_db_instance.rds_admintable.address
 # }

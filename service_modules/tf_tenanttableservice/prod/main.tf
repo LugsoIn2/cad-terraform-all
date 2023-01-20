@@ -20,10 +20,15 @@ resource "aws_dynamodb_table" "tenants_tables" {
     type = "S"
   }
 
-  ttl {
-    enabled        = false
-    attribute_name = "TimeToExist"
+  attribute {
+    name = "customer_nr"
+    type = "S"
   }
+
+  # ttl {
+  #   enabled        = false
+  #   attribute_name = "TimeToExist"
+  # }
 
   global_secondary_index {
     name               = "subscription_type-index"
@@ -35,6 +40,13 @@ resource "aws_dynamodb_table" "tenants_tables" {
   global_secondary_index {
     name               = "user_id-index"
     hash_key           = "user_Id"
+    write_capacity     = 10
+    read_capacity      = 10
+    projection_type    = "ALL"
+  }
+  global_secondary_index {
+    name               = "customer_nr-index"
+    hash_key           = "customer_nr"
     write_capacity     = 10
     read_capacity      = 10
     projection_type    = "ALL"

@@ -87,5 +87,7 @@ env:
     AWS_ACCESS_KEY: aws_access_key
     AWS_SECRET: aws_secret
     ALLOWED_HOSTS: "localhost,127.0.0.1"
+    #ADMINTABLE_ENDPOINT: ""
+    
 
 

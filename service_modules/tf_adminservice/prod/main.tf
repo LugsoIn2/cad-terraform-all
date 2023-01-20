@@ -13,6 +13,10 @@ resource "helm_release" "adminservice" {
     name  = "env.secret.ALLOWED_HOSTS"
     value = replace("${var.allowed_hosts_adminservice}", ",", "\\,")
   }
+  # set {
+  #   name  = "env.secret.ADMINTABLE_ENDPOINT"
+  #   value = data.ws_db_instance.endpoint_var
+  # }
   namespace = var.release_name_and_namespace_k8s_adminservice
   create_namespace = true
   dependency_update = true

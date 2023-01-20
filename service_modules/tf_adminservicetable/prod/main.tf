@@ -11,3 +11,8 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot  = true
 
 }
+
+
+# data "aws_db_instance" "endpoint_var" {
+#   name = aws_db_instance.default.address
+# }

@@ -1,5 +1,6 @@
 locals {
  prod_ev_table_name = "${terraform.workspace}_event_table"
+ prod_admindb_name = "${terraform.workspace}_admintable"
 }
 
 module "prod-userservice" {
@@ -42,7 +43,10 @@ module "prod-adminservice" {
   source = "./../service_modules/tf_adminservice/prod/"
   release_name_and_namespace_k8s_adminservice = terraform.workspace
   allowed_hosts_adminservice = "${terraform.workspace}-adminservice.aws.netpy.de"
-  #adminservicetable_endpoint = data.aws_db_instance.endpoint_var
+  # adminservicetable_endpoint = module.prod-admin-table.rds_address
+  # admindb_name = local.prod_admindb_name
+  # admindb_password = var.admindb_password
+  # admindb_username = var.admindb_username
   access_key = var.access_key
   secret_key = var.secret_key
   # depends_on = [
@@ -67,11 +71,12 @@ module "prod-event-table" {
 
 # module "prod-admin-table" {
 #   source = "./../service_modules/tf_admintableservice/prod"
-#   dbname = "${terraform.workspace}_admintable"
-#   db_username = var.db_username
-#   db_password = var.db_password
+#   admindb_name = local.prod_admindb_name
+#   db_username = var.admindb_username
+#   db_password = var.admindb_password
 # }
 
-# data "aws_db_instance" "endpoint_var" {
-#   name = aws_db_instance.rds_admintable.address
+
+# output "testforandi" {
+#   value = module.prod-admin-table.rds_address
 # }

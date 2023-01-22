@@ -21,10 +21,10 @@ resource "aws_dynamodb_table" "event_table" {
     type = "S"
   }
  
-  # ttl {
-  #   enabled        = false
-  #   attribute_name = "ttl"
-  # }
+  ttl {
+    enabled        = true
+    attribute_name = "ttl"
+  }
 
   global_secondary_index {
     name               = "eventDate-index"

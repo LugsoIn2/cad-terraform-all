@@ -9,6 +9,8 @@ env:
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  AWS_REGION: eu-central-1
+ TF_VAR_admindb_password: ${{ ADMINDB_PASSWORD }}
+ TF_VAR_admindb_username: ${{ ADMINDB_USERNAME }}
  #GITHUB_TOKEN: ${{ secrets.ACTIONS_KEY }}
  #TF_LOG: "TRACE"
 

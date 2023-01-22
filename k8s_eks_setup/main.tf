@@ -52,6 +52,16 @@ module "eks"{
             type                          = "ingress"
             source_cluster_security_group = true
         }
+
+        egress_nodes_mysql_port = {
+            description                   = "Rule for RDS MySQL connection"
+            protocol                      = "tcp"
+            from_port                     = 3306
+            to_port                       = 3306
+            type                          = "egress"
+            #source_cluster_security_group = true
+            cidr_blocks                   = ["0.0.0.0/0"]
+        }
     }
 
     manage_aws_auth_configmap = true

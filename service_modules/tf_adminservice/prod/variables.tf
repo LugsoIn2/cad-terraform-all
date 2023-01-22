@@ -9,22 +9,22 @@ variable "release_name_and_namespace_k8s_adminservice" {
     type = string
 }
 
-# variable "adminservicetable_endpoint" {
-#     description = "the admin table endpoint address"
-#     type = string
-# }
+variable "adminservicetable_endpoint" {
+    description = "the admin table endpoint address"
+    type = string
+}
 
-# variable "admindb_name" {
-#     description = "the name of the admin table"
-#     type = string
-# }
+variable "admindb_name" {
+    description = "the name of the admin table"
+    type = string
+}
 
-# variable "admindb_username" {
-#     description = "the username of the admin table"
-#     type = string
-# }
+variable "admindb_username" {
+    description = "the username of the admin table"
+    type = string
+}
 
-# variable "admindb_password" {
-#     description = "the password of the admin table"
-#     type = string
-# }
+variable "admindb_password" {
+    description = "the password of the admin table"
+    type = string
+}

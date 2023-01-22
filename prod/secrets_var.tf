@@ -10,10 +10,10 @@ variable "gh_token" {
     sensitive   = true
 }
 
-# variable "admindb_username" {
-#     sensitive   = true
-# }
+variable "admindb_username" {
+    sensitive   = true
+}
 
-# variable "admindb_password" {
-#     sensitive   = true
-# }
+variable "admindb_password" {
+    sensitive   = true
+}

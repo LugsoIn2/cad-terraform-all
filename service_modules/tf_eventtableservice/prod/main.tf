@@ -23,7 +23,7 @@ resource "aws_dynamodb_table" "event_table" {
  
   # ttl {
   #   enabled        = false
-  #   attribute_name = "TimeToExist"
+  #   attribute_name = "ttl"
   # }
 
   global_secondary_index {

@@ -1,6 +1,7 @@
 locals {
  prod_ev_table_name = "${terraform.workspace}_event_table"
  prod_admindb_name = "${terraform.workspace}_admintable"
+ prod_tenant_table_name = "${terraform.workspace}_tenants"
 }
 
 module "prod-userservice" {
@@ -49,13 +50,14 @@ module "prod-adminservice" {
   admindb_username = var.admindb_username
   access_key = var.access_key
   secret_key = var.secret_key
+  ten_table_name = local.prod_tenant_table_name
   depends_on = [
     module.prod-admin-table
   ]
 }
 module "prod-tenants-database"{
   source = "./../service_modules/tf_tenanttableservice/prod"
-  dbname = "${terraform.workspace}_tenants"
+  dbname = local.prod_tenant_table_name
   tags_tenants-database = {
       "Environment" = "Prod"
     }

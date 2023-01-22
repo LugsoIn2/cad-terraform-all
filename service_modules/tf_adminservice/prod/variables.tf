@@ -19,12 +19,7 @@ variable "admindb_name" {
     type = string
 }
 
-variable "admindb_username" {
-    description = "the username of the admin table"
-    type = string
-}
-
-variable "admindb_password" {
-    description = "the password of the admin table"
-    type = string
+variable "ten_table_name" {
+  description = "the name of the tenant_table"
+  type = string
 }

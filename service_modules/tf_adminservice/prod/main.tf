@@ -17,22 +17,22 @@ resource "helm_release" "adminservice" {
     name  = "env.secret.ADMINTABLE_ENDPOINT"
     value = var.adminservicetable_endpoint
   }
-
   set {
     name  = "env.secret.DBNAME"
     value = var.admindb_name
   }
-
   set {
     name  = "env.secret.DB_USERNAME"
     value = var.admindb_username
   }
-
   set {
     name  = "env.secret.DB_PASSWORD"
     value = var.admindb_password
   }
-
+    set {
+    name  = "env.secret.TEN_TABLE_NAME"
+    value = var.ten_table_name
+  }
 
   namespace = var.release_name_and_namespace_k8s_adminservice
   create_namespace = true

@@ -92,5 +92,6 @@ env:
     DB_USERNAME: ''
     DB_PASSWORD: ''
     DB_PORT: '3306'
+    TEN_TABLE_NAME: 'tenants'
 
 

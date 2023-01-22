@@ -31,13 +31,15 @@ We use a terraform setup with global state management over AWS S3 Backend.
 In the working directories must be a secrets.auto.tfvar with the following content.
 Alternatively, environment variables can be created with the prefix TF_VAR_. (recommended for the Adminservice Container).
 
-| can TF_VAR_ Prefix    | Var-Name              | value                         |
-| --------------------- | --------------------- | ----------------------------- |
-|         x             | access_key            | aws_key_id                    |
-|         x             | secret_key            | aws_secret_key                |
-|         x             | gh_token              | GitHub PAC Token              |
-|                       | AWS_ACCESS_KEY_ID     | aws_key_id_for_tfbackend      |
-|                       | AWS_SECRET_ACCESS_KEY | aws_secret_key_for_tfbackend  |
+| can TF_VAR_ Prefix    | Var-Name              | value                           |
+| --------------------- | --------------------- | ------------------------------- |
+|         x             | access_key            | aws_key_id                      |
+|         x             | secret_key            | aws_secret_key                  |
+|         x             | gh_token              | GitHub PAC Token                |
+|                       | AWS_ACCESS_KEY_ID     | aws_key_id_for_tfbackend        |
+|                       | AWS_SECRET_ACCESS_KEY | aws_secret_key_for_tfbackend    |
+|         x             | admindb_username      | Username for Admintableservice  |
+|         x             | admindb_password      | Password for Admintableservice  |
 
 <br /><br /><br />
 

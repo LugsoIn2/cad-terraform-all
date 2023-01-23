@@ -25,7 +25,10 @@ module "eks"{
     vpc_id = local.cl_vpc_id
     eks_managed_node_groups = {
         eks-cl-group1 = {
-            iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
+            iam_role_additional_policies = [
+                "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+                "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+            ]
             max_size     = 1
             min_size     = 1
             desired_size = 1

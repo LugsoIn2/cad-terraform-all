@@ -84,8 +84,17 @@ affinity: {}
 
 env:
   secret:
-    AWS_ACCESS_KEY: aws_access_key
-    AWS_SECRET: aws_secret
+    # Access Key for dynamodb user:
+    AWS_ACCESS_KEY: aws_db_access_key
+    AWS_SECRET: aws_db_secret
+    # Access Key for terraform provider user
+    TF_VAR_access_key: aws_tf_access_key
+    TF_VAR_secret_key: aws_tf_secret
+    # Access Key for eventservice deployment
+    TF_VAR_aws_db_user_eventservice_access_key: aws_eventservice_access_key
+    TF_VAR_aws_db_user_eventservice_secret_key: aws_eventservice_secret
+    #GH Token for UI-Service building
+    GH_TOKEN: gh_token
     ALLOWED_HOSTS: "localhost,127.0.0.1"
     ADMINTABLE_ENDPOINT: ''
     DBNAME: ''

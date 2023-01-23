@@ -13,8 +13,6 @@ module "prod-userservice" {
   dist_assets_directory_userservice = "../local_helper/tmp_${terraform.workspace}_userservice/dist/assets"
   dist_directory_userservice = "../local_helper/tmp_${terraform.workspace}_userservice/dist"
   backend_servicename_userservice = "eventservice"
-  access_key = var.access_key
-  secret_key = var.secret_key
   gh_token = var.gh_token
 }
 
@@ -27,18 +25,15 @@ module "prod-adm-ui-service" {
     "Environment" = "Prod"
   }
   backend_servicename_adm_ui_service = "adminservice"
-  access_key = var.access_key
-  secret_key = var.secret_key
   gh_token = var.gh_token
 }
-
 module "prod-eventservice" {
   source = "./../service_modules/tf_eventservice/prod/"
   release_name_and_namespace_k8s_eventservice = terraform.workspace
   allowed_hosts_eventservice = "${terraform.workspace}-eventservice.aws.netpy.de"
   ev_table_name = local.prod_ev_table_name
-  access_key = var.access_key
-  secret_key = var.secret_key
+  aws_db_user_access_key = var.aws_db_user_eventservice_access_key
+  aws_db_user_secret_key = var.aws_db_user_eventservice_secret_key
 }
 module "prod-adminservice" {
   source = "./../service_modules/tf_adminservice/prod/"
@@ -48,8 +43,13 @@ module "prod-adminservice" {
   admindb_name = local.prod_admindb_name
   admindb_password = var.admindb_password
   admindb_username = var.admindb_username
-  access_key = var.access_key
-  secret_key = var.secret_key
+  aws_db_user_access_key = var.aws_db_user_adminservice_access_key
+  aws_db_user_secret_key = var.aws_db_user_adminservice_secret_key
+  aws_tf_user_access_key = var.access_key
+  aws_tf_user_secret_key = var.secret_key
+  aws_db_user_eventservice_access_key = var.aws_db_user_eventservice_access_key
+  aws_db_user_eventservice_secret_key = var.aws_db_user_eventservice_secret_key
+  gh_token_ui_repos = var.gh_token
   ten_table_name = local.prod_tenant_table_name
   depends_on = [
     module.prod-admin-table

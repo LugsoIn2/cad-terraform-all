@@ -3,11 +3,11 @@ resource "helm_release" "eventservice" {
   chart      = "../helm/eventservice"
   set {
     name  = "env.secret.AWS_ACCESS_KEY"
-    value = var.access_key
+    value = var.aws_db_user_access_key
   }
   set {
     name  = "env.secret.AWS_SECRET"
-    value = var.secret_key
+    value = var.aws_db_user_secret_key
   }
   set {
     name  = "env.secret.ALLOWED_HOSTS"

@@ -2,7 +2,7 @@ locals {
  prod_ev_table_name = "${terraform.workspace}_event_table"
 }
 
-module "prod-userservice" {
+module "enterprise-userservice" {
   source = "./../service_modules/tf_userservice/prod/"
   bucket_name_userservice = "userservice"
   tags_userservice = {
@@ -12,19 +12,17 @@ module "prod-userservice" {
   dist_assets_directory_userservice = "../local_helper/tmp_${terraform.workspace}_userservice/dist/assets"
   dist_directory_userservice = "../local_helper/tmp_${terraform.workspace}_userservice/dist"
   backend_servicename_userservice = "eventservice"
-  access_key = var.access_key
-  secret_key = var.secret_key
   gh_token = var.gh_token
 }
-module "prod-eventservice" {
+module "enterprise-eventservice" {
   source = "./../service_modules/tf_eventservice/prod/"
   release_name_and_namespace_k8s_eventservice = terraform.workspace
   allowed_hosts_eventservice = "${terraform.workspace}-eventservice.aws.netpy.de"
   ev_table_name = local.prod_ev_table_name
-  access_key = var.access_key
-  secret_key = var.secret_key
+  aws_db_user_access_key = var.aws_db_user_eventservice_access_key
+  aws_db_user_secret_key = var.aws_db_user_eventservice_secret_key
 }
-module "prod-event-table" {
+module "enterprise-event-table" {
   source = "./../service_modules/tf_eventtableservice/prod"
   dbname = local.prod_ev_table_name
   tags_eventtable-database = {

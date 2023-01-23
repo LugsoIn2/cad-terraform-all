@@ -1,7 +1,7 @@
-variable "access_key" {
+variable "aws_db_user_access_key" {
     sensitive   = true
 }
 
-variable "secret_key" {
+variable "aws_db_user_secret_key" {
     sensitive   = true
 }

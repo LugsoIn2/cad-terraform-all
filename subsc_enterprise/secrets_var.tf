@@ -9,3 +9,11 @@ variable "secret_key" {
 variable "gh_token" {
     sensitive   = true
 }
+
+variable "aws_db_user_eventservice_access_key" {
+    sensitive   = true
+}
+
+variable "aws_db_user_eventservice_secret_key" {
+    sensitive   = true
+}

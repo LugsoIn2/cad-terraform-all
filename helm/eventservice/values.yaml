@@ -82,12 +82,9 @@ tolerations: []
 
 affinity: {}
 
-###### back? mal lurge
-#aws_access_key: aws_access_key
-#aws_secret: aws_secret
-
 env:
   secret:
+    # Access Keys for dynamodb user:
     AWS_ACCESS_KEY: aws_access_key
     AWS_SECRET: aws_secret
     ALLOWED_HOSTS: "localhost,127.0.0.1"

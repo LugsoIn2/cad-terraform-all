@@ -3,12 +3,37 @@ resource "helm_release" "adminservice" {
   chart      = "../helm/adminservice"
   set {
     name  = "env.secret.AWS_ACCESS_KEY"
-    value = var.access_key
+    value = var.aws_db_user_access_key
   }
   set {
     name  = "env.secret.AWS_SECRET"
-    value = var.secret_key
+    value = var.aws_db_user_secret_key
   }
+  set {
+    name  = "env.secret.TF_VAR_access_key"
+    value = var.aws_tf_user_access_key
+  }
+  set {
+    name  = "env.secret.TF_VAR_secret_key"
+    value = var.aws_tf_user_secret_key
+  }
+  set {
+    name  = "env.secret.TF_VAR_aws_db_user_eventservice_access_key"
+    value = var.aws_db_user_eventservice_access_key
+  }
+  set {
+    name  = "env.secret.TF_VAR_aws_db_user_eventservice_secret_key"
+    value = var.aws_db_user_eventservice_secret_key
+  }
+  set {
+    name  = "env.secret.GH_TOKEN"
+    value = var.gh_token_ui_repos
+  }
+
+
+
+
+
   set {
     name  = "env.secret.ALLOWED_HOSTS"
     value = replace("${var.allowed_hosts_adminservice}", ",", "\\,")

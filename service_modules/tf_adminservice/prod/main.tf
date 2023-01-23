@@ -26,7 +26,7 @@ resource "helm_release" "adminservice" {
     value = var.aws_db_user_eventservice_secret_key
   }
   set {
-    name  = "env.secret.GH_TOKEN"
+    name  = "env.secret.TF_VAR_gh_token"
     value = var.gh_token_ui_repos
   }
 

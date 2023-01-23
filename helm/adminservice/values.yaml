@@ -94,7 +94,7 @@ env:
     TF_VAR_aws_db_user_eventservice_access_key: aws_eventservice_access_key
     TF_VAR_aws_db_user_eventservice_secret_key: aws_eventservice_secret
     #GH Token for UI-Service building
-    GH_TOKEN: gh_token
+    TF_VAR_gh_token: gh_token
     ALLOWED_HOSTS: "localhost,127.0.0.1"
     ADMINTABLE_ENDPOINT: ''
     DBNAME: ''

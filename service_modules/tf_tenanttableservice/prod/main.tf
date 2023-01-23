@@ -6,7 +6,7 @@ resource "aws_dynamodb_table" "tenants_tables" {
   hash_key           = "city"
 
   attribute {
-    name = "user_Id"
+    name = "user_id"
     type = "S"
   }
 
@@ -39,7 +39,7 @@ resource "aws_dynamodb_table" "tenants_tables" {
   }
   global_secondary_index {
     name               = "user_id-index"
-    hash_key           = "user_Id"
+    hash_key           = "user_id"
     write_capacity     = 10
     read_capacity      = 10
     projection_type    = "ALL"

@@ -29,11 +29,14 @@ resource "helm_release" "adminservice" {
     name  = "env.secret.TF_VAR_gh_token"
     value = var.gh_token_ui_repos
   }
-
-
-
-
-
+  set {
+    name  = "env.secret.TF_VAR_aws_db_user_scraper_generic_access_key"
+    value = var.aws_db_user_scraper_generic_access_key
+  }
+  set {
+    name  = "env.secret.TF_VAR_aws_db_user_scraper_generic_secret_key"
+    value = var.aws_db_user_scraper_generic_secret_key
+  }
   set {
     name  = "env.secret.ALLOWED_HOSTS"
     value = replace("${var.allowed_hosts_adminservice}", ",", "\\,")
@@ -54,7 +57,7 @@ resource "helm_release" "adminservice" {
     name  = "env.secret.DB_PASSWORD"
     value = var.admindb_password
   }
-    set {
+  set {
     name  = "env.secret.TEN_TABLE_NAME"
     value = var.ten_table_name
   }

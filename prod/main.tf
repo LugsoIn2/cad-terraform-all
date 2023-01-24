@@ -49,6 +49,8 @@ module "prod-adminservice" {
   aws_tf_user_secret_key = var.secret_key
   aws_db_user_eventservice_access_key = var.aws_db_user_eventservice_access_key
   aws_db_user_eventservice_secret_key = var.aws_db_user_eventservice_secret_key
+  aws_db_user_scraper_generic_access_key = var.aws_db_user_scraper_generic_access_key
+  aws_db_user_scraper_generic_secret_key = var.aws_db_user_scraper_generic_secret_key
   gh_token_ui_repos = var.gh_token
   ten_table_name = local.prod_tenant_table_name
   depends_on = [

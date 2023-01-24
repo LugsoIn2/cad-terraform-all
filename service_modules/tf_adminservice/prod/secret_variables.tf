@@ -24,9 +24,14 @@ variable "admindb_username" {
     type = string
     sensitive = true
 }
-
 variable "admindb_password" {
     description = "the password of the admin table"
     type = string
     sensitive = true
+}
+variable "aws_db_user_scraper_generic_access_key" {
+    sensitive   = true
+}
+variable "aws_db_user_scraper_generic_secret_key" {
+    sensitive   = true
 }

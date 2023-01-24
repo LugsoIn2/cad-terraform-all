@@ -95,6 +95,10 @@ env:
     TF_VAR_aws_db_user_eventservice_secret_key: aws_eventservice_secret
     #GH Token for UI-Service building
     TF_VAR_gh_token: gh_token
+    # Access Key for scraper-generic cronjob
+    TF_VAR_aws_db_user_scraper_generic_access_key: aws_scraper_generic_access_key
+    TF_VAR_aws_db_user_scraper_generic_secret_key: aws_scraper_generic_secret
+    # Django env Vars
     ALLOWED_HOSTS: "localhost,127.0.0.1"
     ADMINTABLE_ENDPOINT: ''
     DBNAME: ''

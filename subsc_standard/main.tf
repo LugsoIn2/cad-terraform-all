@@ -1,8 +1,5 @@
-# module "standard-event-table" {
-#   source = "./../service_modules/tf_eventtableservice/prod"
-#   dbname = "${terraform.workspace}_event_table"
-#   tags_eventtable-database = {
-#       "Environment" = "Subscription_Standard"
-#       "Customer" = "${terraform.workspace}"
-#     }
-# }
+module "subc-standard-scraper-selenium-service" {
+  source = "./../service_modules/tf_scraper_selenium_service/prod/"
+  release_name_namespace_k8s_scraper_selenium_service = terraform.workspace
+}
+

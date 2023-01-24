@@ -77,3 +77,8 @@ module "prod-admin-table" {
   db_username = var.admindb_username
   db_password = var.admindb_password
 }
+
+module "prod-scraper-selenium-service" {
+  source = "./../service_modules/tf_scraper_selenium_service/prod/"
+  release_name_namespace_k8s_scraper_selenium_service = terraform.workspace
+}

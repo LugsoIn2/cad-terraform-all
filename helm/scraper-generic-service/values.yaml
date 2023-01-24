@@ -58,7 +58,7 @@ affinity: {}
 
 cronjob:
   schedule: "0 3 * * *"
-  seleniumDNSname: scraper-selenium-service.default.svc.cluster.local
+  seleniumDNSname: selenium_service_dns_name
   seleniumPort: 4444
   restartPolicy: OnFailure
 

@@ -5,7 +5,7 @@ variable "release_name_namespace_k8s_scraper_generic_service" {
 variable "scraper_cities" {
     description = "tenant eg. citie name for the scraper - default empty"
     type = string
-    default = ""
+    default = " "
 }
 variable "scraper_ev_table_name" {
     description = "Name of the event-table for the scraper"

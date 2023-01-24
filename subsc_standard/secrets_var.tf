@@ -5,10 +5,6 @@ variable "access_key" {
 variable "secret_key" {
     sensitive   = true
 }
-
-variable "gh_token" {
-    sensitive   = true
-}
 variable "aws_db_user_scraper_generic_access_key" {
     sensitive   = true
 }

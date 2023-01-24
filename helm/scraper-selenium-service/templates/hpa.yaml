@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "scraperseleniumservice.fullname" . }}
+  name: {{ include "scraper-selenium-service.fullname" . }}
   labels:
-    {{- include "scraperseleniumservice.labels" . | nindent 4 }}
+    {{- include "scraper-selenium-service.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "scraperseleniumservice.fullname" . }}
+    name: {{ include "scraper-selenium-service.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

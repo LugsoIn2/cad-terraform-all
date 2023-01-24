@@ -6,9 +6,6 @@ metadata:
     {{- include "scraper-generic-service.labels" . | nindent 4 }}
 spec:
   schedule: "{{ .Values.cronjob.schedule }}"
-  selector:
-    matchLabels:
-      {{- include "scraper-generic-service.selectorLabels" . | nindent 6 }}
   jobTemplate:
     spec:
       template:

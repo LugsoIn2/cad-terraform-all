@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "scraper-generic-service.fullname" . }}
+  labels:
+    {{- include "scraper-generic-service.labels" . | nindent 4 }}
+spec:
+  schedule: "{{ .Values.cronjob.schedule }}"
+  selector:
+    matchLabels:
+      {{- include "scraper-generic-service.selectorLabels" . | nindent 6 }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "scraper-generic-service.selectorLabels" . | nindent 12 }}
+        spec:
+          restartPolicy: {{ .Values.cronjob.restartPolicy }}
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          serviceAccountName: {{ include "scraper-generic-service.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Chart.Name }}
+            #restartPolicy: OnFailure
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              env:
+              {{- include "helpers.list-env-variables" . | indent 14 }}
+              livenessProbe:
+                exec:
+                  command: ["/bin/sh", "-c", "curl -sSL http://{{ .Values.cronjob.seleniumDNSname }}:{{ .Values.cronjob.seleniumPort }}/wd/hub/status | jq -r '.value.ready' | grep -q \"true\" || exit 0"]
+              # livenessProbe:
+              #   httpGet:
+              #     path: /
+              #     port: http
+              # readinessProbe:
+              #   httpGet:
+              #     path: /
+              #     port: http
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

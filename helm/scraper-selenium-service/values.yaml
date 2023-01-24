@@ -11,7 +11,7 @@ image:
   tag: "latest"
 
 imagePullSecrets: []
-nameOverride: "scraperseleniumservice"
+nameOverride: "scraper-selenium-service"
 fullnameOverride: ""
 
 serviceAccount:

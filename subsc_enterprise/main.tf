@@ -42,7 +42,7 @@ module "subc-enterprise-scraper-generic-service" {
   release_name_namespace_k8s_scraper_generic_service = terraform.workspace
   scraper_ev_table_name = local.enterprise_ev_table_name
   scraper_ten_table_name = local.prod_tenant_table_name
-  scraper_cronjob_schedule = "0/30 * * * *"
+  scraper_cronjob_schedule = "0/15 * * * *"
   scraper_cronjob_seleniumDNSname = "${terraform.workspace}-scraper-selenium-service.${terraform.workspace}.svc.cluster.local"
   scraper_cities = var.scraper_cities
 }

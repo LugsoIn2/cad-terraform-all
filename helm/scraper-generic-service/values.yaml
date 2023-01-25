@@ -58,7 +58,7 @@ tolerations: []
 affinity: {}
 
 cronjob:
-  schedule: "0 3 * * *"
+  schedule:
   seleniumDNSname: selenium_service_dns_name
   seleniumPort: 4444
   restartPolicy: OnFailure

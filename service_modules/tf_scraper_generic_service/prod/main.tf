@@ -29,15 +29,15 @@ resource "helm_release" "scraper_generic_service" {
     value = var.scraper_ten_table_name
   }
   set {
-    name  = "env.cronjob.schedule"
+    name  = "cronjob.schedule"
     value = var.scraper_cronjob_schedule
   }
   set {
-    name  = "env.cronjob.seleniumDNSname"
+    name  = "cronjob.seleniumDNSname"
     value = var.scraper_cronjob_seleniumDNSname
   }
   set {
-    name  = "env.cronjob.seleniumPort"
+    name  = "cronjob.seleniumPort"
     value = var.scraper_cronjob_seleniumPort
   }
   set {

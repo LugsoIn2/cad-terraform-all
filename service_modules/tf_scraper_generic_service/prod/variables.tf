@@ -17,7 +17,7 @@ variable "scraper_ten_table_name" {
 variable "scraper_cronjob_schedule" {
     description = "the cronjob schedule for the scraper - default '0 3 * * *'"
     type = string
-    default = "0 3 * * *"
+    #default = "0 3 * * *"
 }
 variable "scraper_cronjob_seleniumDNSname" {
     description = "the cronjob seleniumDNSname for the scraper"

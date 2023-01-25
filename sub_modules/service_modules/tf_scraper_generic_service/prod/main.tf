@@ -3,7 +3,7 @@ locals {
 }
 resource "helm_release" "scraper_generic_service" {
   name       = "${var.release_name_namespace_k8s_scraper_generic_service}-scraper-service-${local.lower_scraper_name}"
-  chart      = "../../../helm/scraper-generic-service"
+  chart      = "../../../../helm/scraper-generic-service"
   set {
     name  = "env.secret.AWS_ACCESS_KEY"
     value = var.aws_db_user_access_key

@@ -1,6 +1,7 @@
 resource "helm_release" "adminservice" {
   name       = "${var.release_name_and_namespace_k8s_adminservice}-adminservice"
-  chart      = "../../../../helm/adminservice"
+  chart      = "./../helm/adminservice"
+  #values     = ["./../../../../helm/adminservice/values.yaml"]
   set {
     name  = "env.secret.AWS_ACCESS_KEY"
     value = var.aws_db_user_access_key
@@ -64,5 +65,5 @@ resource "helm_release" "adminservice" {
 
   namespace = var.release_name_and_namespace_k8s_adminservice
   create_namespace = true
-  dependency_update = true
+  #dependency_update = true
 }

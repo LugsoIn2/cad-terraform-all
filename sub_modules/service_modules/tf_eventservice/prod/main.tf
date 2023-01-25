@@ -1,6 +1,6 @@
 resource "helm_release" "eventservice" {
   name       = "${var.release_name_and_namespace_k8s_eventservice}-eventservice"
-  chart      = "../../../../helm/eventservice"
+  chart      = "./../helm/eventservice"
   set {
     name  = "env.secret.AWS_ACCESS_KEY"
     value = var.aws_db_user_access_key

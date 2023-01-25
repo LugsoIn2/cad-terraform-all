@@ -1,8 +1,8 @@
-# locals {
-#   lower_scraper_name = lower("${var.scraper_scraper_name}")
-# }
+locals {
+  lower_scraper_name = lower(var.scraper_scraper_name)
+}
 resource "helm_release" "scraper_generic_service" {
-  name       = "${var.release_name_namespace_k8s_scraper_generic_service}-scraper-service-google"
+  name       = "${var.release_name_namespace_k8s_scraper_generic_service}-scraper-service-${local.lower_scraper_name}"
   chart      = "../helm/scraper-generic-service"
   set {
     name  = "env.secret.AWS_ACCESS_KEY"

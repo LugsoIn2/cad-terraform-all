@@ -5,7 +5,6 @@ variable "release_name_namespace_k8s_scraper_generic_service" {
 variable "scraper_cities" {
     description = "tenant eg. citie name for the scraper - default empty"
     type = string
-    default = " "
 }
 variable "scraper_ev_table_name" {
     description = "Name of the event-table for the scraper"
@@ -28,5 +27,10 @@ variable "scraper_cronjob_seleniumPort" {
     description = "the cronjob seleniumDNSname for the scraper - default 4444"
     type = string
     default = 4444
+}
+variable "scraper_scraper_name" {
+  description = "the scrapername 'GOOGLE' / 'KULA' / 'BFK' (type of scraper)"
+  type = string
+  default = "GOOGLE"
 }
 

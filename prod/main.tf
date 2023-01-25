@@ -94,4 +94,5 @@ module "prod-scraper-generic-service" {
   scraper_ten_table_name = local.prod_tenant_table_name
   scraper_cronjob_schedule = "0 3 * * *"
   scraper_cronjob_seleniumDNSname = "${terraform.workspace}-scraper-selenium-service.${terraform.workspace}.svc.cluster.local"
+  scraper_cities = "generic"
 }

@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./k8s_eks_setup/
+        working-directory: ./aws_basic_setup/k8s_eks_setup/
     
     steps:
       - name: Checkout

@@ -1,5 +1,5 @@
 module "ecr-repo-adminservice" {
-    source = "./../modules/ecr"
+    source = "./../../sub_modules/modules/ecr"
     ecr_name = "cad-adminservice"
     tags = {
     "Environment" = "Prod"
@@ -8,7 +8,7 @@ module "ecr-repo-adminservice" {
 }
 
 module "ecr-repo-scraper" {
-    source = "./../modules/ecr"
+    source = "./../../sub_modules/modules/ecr"
     ecr_name = "cad-event-scraper"
     tags = {
     "Environment" = "Prod"
@@ -17,7 +17,7 @@ module "ecr-repo-scraper" {
 }
 
 module "ecr-repo-eventservice" {
-    source = "./../modules/ecr"
+    source = "./../../sub_modules/modules/ecr"
     ecr_name = "cad-eventservice"
     tags = {
     "Environment" = "Prod"

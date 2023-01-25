@@ -7,7 +7,7 @@ data "external" "build_admin_ui" {
 ./load_and_build_admin_ui.sh ${var.gh_token} ${terraform.workspace} -${var.backend_servicename_adm_ui_service} ${var.https_enabled_adm_ui_service} >&2 && echo "{\"dest\": \"./tmp_${terraform.workspace}_admin_ui\"}"
 EOT
 	]
-	working_dir = "${path.module}/../../../local_helper/"
+	working_dir = "${path.module}/../../../../local_helper/"
 }
 module "adm_ui_service_bucket" {
     source = "./../../../modules/s3"
@@ -35,6 +35,6 @@ data "external" "clean_tmp_files_admin_ui" {
 ./clean_tmp_files_admin_ui.sh ${terraform.workspace} >&2 && echo "{\"clean\": \"true\"}"
 EOT
 	]
-	working_dir = "${path.module}/../../../local_helper/"
+	working_dir = "${path.module}/../../../../local_helper/"
     depends_on = [module.adm_ui_service_bucket]
 }

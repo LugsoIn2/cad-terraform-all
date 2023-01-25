@@ -4,7 +4,7 @@ locals {
 }
 
 module "enterprise-userservice" {
-  source = "./../service_modules/tf_userservice/prod/"
+  source = "./../sub_modules/service_modules/tf_userservice/prod/"
   bucket_name_userservice = "userservice"
   tags_userservice = {
       "Environment" = "Subscription_Enterprise"
@@ -16,7 +16,7 @@ module "enterprise-userservice" {
   gh_token = var.gh_token
 }
 module "enterprise-eventservice" {
-  source = "./../service_modules/tf_eventservice/prod/"
+  source = "./../sub_modules/service_modules/tf_eventservice/prod/"
   release_name_and_namespace_k8s_eventservice = terraform.workspace
   allowed_hosts_eventservice = "${terraform.workspace}-eventservice.aws.netpy.de"
   ev_table_name = local.enterprise_ev_table_name
@@ -24,7 +24,7 @@ module "enterprise-eventservice" {
   aws_db_user_secret_key = var.aws_db_user_eventservice_secret_key
 }
 module "enterprise-event-table" {
-  source = "./../service_modules/tf_eventtableservice/prod"
+  source = "./../sub_modules/service_modules/tf_eventtableservice/prod"
   dbname = local.enterprise_ev_table_name
   tags_eventtable-database = {
       "Environment" = "Subscription_Enterprise"
@@ -32,11 +32,11 @@ module "enterprise-event-table" {
     }
 }
 module "subc-enterprise-scraper-selenium-service" {
-  source = "./../service_modules/tf_scraper_selenium_service/prod/"
+  source = "./../sub_modules/service_modules/tf_scraper_selenium_service/prod/"
   release_name_namespace_k8s_scraper_selenium_service = terraform.workspace
 }
 module "subc-enterprise-scraper-generic-service" {
-  source = "./../service_modules/tf_scraper_generic_service/prod/"
+  source = "./../sub_modules/service_modules/tf_scraper_generic_service/prod/"
   aws_db_user_access_key = var.aws_db_user_scraper_generic_access_key
   aws_db_user_secret_key = var.aws_db_user_scraper_generic_secret_key
   release_name_namespace_k8s_scraper_generic_service = terraform.workspace

@@ -1,6 +1,6 @@
 resource "helm_release" "external-dns" {
   name       = "external-dns"
-  chart      = "../helm/external-dns"
+  chart      = "../../helm/external-dns"
   set {
     name  = "eksToRoute53rolearn"
     value = aws_iam_role.eks-to-route53.arn

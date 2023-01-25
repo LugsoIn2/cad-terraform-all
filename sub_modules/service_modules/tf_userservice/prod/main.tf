@@ -8,7 +8,7 @@ data "external" "build_userservice" {
 ./load_and_build_userservice.sh ${var.gh_token} ${terraform.workspace} -${var.backend_servicename_userservice} ${var.https_enabled_userservice} >&2 && echo "{\"dest\": \"./tmp_${terraform.workspace}_userservice\"}"
 EOT
 	]
-	working_dir = "${path.module}/../../../local_helper/"
+	working_dir = "${path.module}/../../../../local_helper/"
 }
 module "userservice_bucket" {
     source = "./../../../modules/s3"
@@ -36,6 +36,6 @@ data "external" "clean_tmp_files_userservice" {
 ./clean_tmp_files_userservice.sh ${terraform.workspace} >&2 && echo "{\"clean\": \"true\"}"
 EOT
 	]
-	working_dir = "${path.module}/../../../local_helper/"
+	working_dir = "${path.module}/../../../../local_helper/"
     depends_on = [module.userservice_bucket]
 }

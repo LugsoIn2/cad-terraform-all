@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ include "scraper-generic-service.fullname" . }}-firstrun"
+  labels:
+    {{- include "scraper-generic-service.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "scraper-generic-service.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: {{ .Values.cronjob.restartPolicy }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 10 }}
+      {{- end }}
+      serviceAccountName: {{ include "scraper-generic-service.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 10 }}
+      containers:
+        - name: {{ .Chart.Name }}
+        #restartPolicy: OnFailure
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 14 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- include "helpers.list-env-variables" . | indent 12 }}
+          livenessProbe:
+            exec:
+              command: ["/bin/sh", "-c", "curl -sSL http://{{ .Values.cronjob.seleniumDNSname }}:{{ .Values.cronjob.seleniumPort }}/wd/hub/status | jq -r '.value.ready' | grep -q \"true\" || exit 0"]
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 14 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

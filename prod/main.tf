@@ -2,6 +2,12 @@ locals {
  prod_ev_table_name = "${terraform.workspace}_event_table"
  prod_admindb_name = "${terraform.workspace}_admintable"
  prod_tenant_table_name = "${terraform.workspace}_tenants"
+ dbuser_eventservice_key = module.create_eventservice_user.iam_access_key
+ dbuser_eventservice_secret = module.create_eventservice_user.iam_secret_key
+ dbuser_adminservice_key = module.create_adminservice_user.iam_access_key
+ dbuser_adminservice_secret = module.create_adminservice_user.iam_secret_key
+ dbuser_scraperservice_key = module.create_scraperservice_user.iam_access_key
+ dbuser_scraperservice_secret = module.create_scraperservice_user.iam_secret_key
 }
 
 module "prod-userservice" {
@@ -32,8 +38,8 @@ module "prod-eventservice" {
   release_name_and_namespace_k8s_eventservice = terraform.workspace
   allowed_hosts_eventservice = "${terraform.workspace}-eventservice.aws.netpy.de"
   ev_table_name = local.prod_ev_table_name
-  aws_db_user_access_key = var.aws_db_user_eventservice_access_key
-  aws_db_user_secret_key = var.aws_db_user_eventservice_secret_key
+  aws_db_user_access_key = local.dbuser_eventservice_key
+  aws_db_user_secret_key = local.dbuser_eventservice_secret
 }
 module "prod-adminservice" {
   source = "./../sub_modules/service_modules/tf_adminservice/prod/"
@@ -43,14 +49,14 @@ module "prod-adminservice" {
   admindb_name = local.prod_admindb_name
   admindb_password = var.admindb_password
   admindb_username = var.admindb_username
-  aws_db_user_access_key = var.aws_db_user_adminservice_access_key
-  aws_db_user_secret_key = var.aws_db_user_adminservice_secret_key
+  aws_db_user_access_key = local.dbuser_adminservice_key
+  aws_db_user_secret_key = local.dbuser_adminservice_secret
   aws_tf_user_access_key = var.access_key
   aws_tf_user_secret_key = var.secret_key
-  aws_db_user_eventservice_access_key = var.aws_db_user_eventservice_access_key
-  aws_db_user_eventservice_secret_key = var.aws_db_user_eventservice_secret_key
-  aws_db_user_scraper_generic_access_key = var.aws_db_user_scraper_generic_access_key
-  aws_db_user_scraper_generic_secret_key = var.aws_db_user_scraper_generic_secret_key
+  aws_db_user_eventservice_access_key = local.dbuser_eventservice_key
+  aws_db_user_eventservice_secret_key = local.dbuser_eventservice_secret
+  aws_db_user_scraper_generic_access_key = local.dbuser_scraperservice_key
+  aws_db_user_scraper_generic_secret_key = local.dbuser_scraperservice_secret
   gh_token_ui_repos = var.gh_token
   ten_table_name = local.prod_tenant_table_name
   depends_on = [
@@ -87,8 +93,8 @@ module "prod-scraper-selenium-service" {
 
 module "prod-scraper-generic-service" {
   source = "./../sub_modules/service_modules/tf_scraper_generic_service/prod/"
-  aws_db_user_access_key = var.aws_db_user_scraper_generic_access_key
-  aws_db_user_secret_key = var.aws_db_user_scraper_generic_secret_key
+  aws_db_user_access_key = local.dbuser_scraperservice_key
+  aws_db_user_secret_key = local.dbuser_scraperservice_secret
   release_name_namespace_k8s_scraper_generic_service = terraform.workspace
   scraper_ev_table_name = local.prod_ev_table_name
   scraper_ten_table_name = local.prod_tenant_table_name

@@ -1,6 +1,8 @@
 locals {
  prod_ev_table_name = "prod_event_table"
  prod_tenant_table_name = "prod_tenants"
+ dbuser_scraperservice_key = module.create_scraperservice_user.iam_access_key
+ dbuser_scraperservice_secret = module.create_scraperservice_user.iam_secret_key
 }
 module "subc-standard-scraper-selenium-service" {
   source = "./../sub_modules/service_modules/tf_scraper_selenium_service/prod/"
@@ -8,8 +10,8 @@ module "subc-standard-scraper-selenium-service" {
 }
 module "subc-standard-scraper-generic-service" {
   source = "./../sub_modules/service_modules/tf_scraper_generic_service/prod/"
-  aws_db_user_access_key = var.aws_db_user_scraper_generic_access_key
-  aws_db_user_secret_key = var.aws_db_user_scraper_generic_secret_key
+  aws_db_user_access_key = local.dbuser_scraperservice_key
+  aws_db_user_secret_key = local.dbuser_scraperservice_key
   release_name_namespace_k8s_scraper_generic_service = terraform.workspace
   scraper_ev_table_name = local.prod_ev_table_name
   scraper_ten_table_name = local.prod_tenant_table_name

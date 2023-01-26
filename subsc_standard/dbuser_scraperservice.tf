@@ -20,7 +20,7 @@ resource "aws_iam_policy" "scraperservice_policy" {
           "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants/index/customer_nr-index",
           "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants/index/subscription_type-index",
           "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants/index/user_id-index",
-          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_event_table/index/eventDate-index"
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_event_table/index/eventDate-index",
         ]
       },
     ]

@@ -15,7 +15,10 @@ resource "aws_iam_policy" "adminservice_policy" {
         ]
         Effect   = "Allow"
         Resource = [
-          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants"
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants",
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants/index/customer_nr-index",
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants/index/subscription_type-index",
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_tenants/index/user_id-index"
         ]
       },
     ]

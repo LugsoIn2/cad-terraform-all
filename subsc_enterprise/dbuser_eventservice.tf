@@ -15,7 +15,8 @@ resource "aws_iam_policy" "eventservice_policy" {
         ]
         Effect   = "Allow"
         Resource = [
-          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_event_table"
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_event_table",
+          "arn:aws:dynamodb:eu-central-1:150625325991:table/${terraform.workspace}_event_table/index/eventDate-index"
         ]
       },
     ]
